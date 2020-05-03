@@ -28,15 +28,13 @@ const getAnswerType = (type, question) => {
     case "free-text":
       return <FreeTextQuestionBody body={question.body}></FreeTextQuestionBody>;
     case "select":
-      return (
-        <SelectSingleQuestionBody body={question.body}></SelectSingleQuestionBody>
-      );
+      return <SelectSingleQuestionBody body={question.body}></SelectSingleQuestionBody>
     case "select-multi":
-      return (
-        <SelectMultiQuestionBody body={question.body}></SelectMultiQuestionBody>
-      );
+      return <SelectMultiQuestionBody body={question.body}></SelectMultiQuestionBody>
     case "slider":
       return <SliderQuestionBody body={question.body}></SliderQuestionBody>;
+    case "date-teim":
+      return <DateTimeQuestionBody body={question.body}></DateTimeQuestionBody>
     default:
       break;
   }
@@ -58,7 +56,7 @@ const QuestionContainer = ({ question }) => {
         <Grid item container xs>
           <QuestionTitle question={question}></QuestionTitle>
         </Grid>
-        <Grid item container xs>
+        <Grid item container xs >
           {getAnswerType(question.type, question)}
         </Grid>
       </Grid>

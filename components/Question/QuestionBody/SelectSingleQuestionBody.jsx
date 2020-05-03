@@ -35,7 +35,7 @@ const SelectSingleQuestionBody = ({ body }) => {
   };
 
   return (
-    <FormControl component="fieldset">
+    <FormControl component="fieldset" style={{marginLeft:'6%'}}>
       <RadioGroup  value={value} onChange={handleChange}>
         {body ? body.options.map((element, index) => {
           return (

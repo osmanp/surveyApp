@@ -7,6 +7,8 @@ import SelectAnswerOptions from "../components/SurveyBuilder/SelectAnswerOptions
 import QuestionForm from "../components/SurveyBuilder/QuestionForm";
 import QuestionContainer from '../components/Question/QuestionContainer'
 import SelectMultiQuestionBody from "../components/Question/QuestionBody/SelectMultiQuestionBody";
+import SurveyTitleForm from "../components/SurveyBuilder/SurveyTitleForm";
+import SurveyBuilder from "../components/SurveyBuilder/SurveyBuilder";
 
 export default function Home() {
   return (
@@ -20,9 +22,8 @@ export default function Home() {
 {/* 
         <QuestionContainer question={Questions[6]}></QuestionContainer> */}
 
-          <SurveyContainer survey={Surveys[0]} questions={Questions}></SurveyContainer>   
-         {/* <QuestionForm></QuestionForm>  */}
-         
+       <SurveyBuilder></SurveyBuilder>
+       
       </Container>    
   );
 }

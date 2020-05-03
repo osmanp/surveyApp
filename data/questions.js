@@ -89,8 +89,7 @@ const Questions = [
       text: "How happy are you?",
     },
     body: {
-      variant: "discrete",
-      gridSlider: true,
+      variant: "grid",    
       defaultValue: 5,
       min: 0,
       max: 10,
@@ -121,7 +120,43 @@ const Questions = [
         { label: "How funny are you", id: "3" },
       ]
     }
-  }
+  },
+  {
+    id: 7,
+    type: "slider",
+    number: "7",
+    title: {
+      text: "How happy are you?",
+    },
+    body: {
+      variant: "rating",
+      gridSlider: true,
+      defaultValue: 5,
+      min: 1,
+      max: 10,
+      step: 1,
+      minLabel: "Not happy",
+      maxLabel: "Very happy",
+    },
+  },
+  {
+    id: 8,
+    type: "slider",
+    number: "8",
+    title: {
+      text: "How happy are you?",
+    },
+    body: {
+      variant: "radio",
+      gridSlider: true,
+      defaultValue: 5,
+      min: 1,
+      max: 5,
+      step: 1,
+      minLabel: "Not happy",
+      maxLabel: "Very happy",
+    },
+  },
 ];
 
 export default Questions;

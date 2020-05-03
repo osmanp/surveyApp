@@ -12,7 +12,7 @@ const FreeTextQuestionBody = ({ body }) => {
   const classes = useStyles();
   const [userAnswer, setUserAnswer] = React.useState();
   return (
-    <div className={classes.root} style={{minWidth:'100%'}}>      
+    <div className={classes.root} style={{minWidth:'100%', textAlign:'center'}}>      
           <TextField
             variant="outlined"
             value={userAnswer}

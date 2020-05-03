@@ -16,35 +16,37 @@ const QuestionTitle = ({ question }) => {
   return (
     <div className={classes.root}>
       <Grid container direction="column">
-      {question.title.image ? (
+        {question.title.image ? (
           <Grid item xs={11}>
-            <div style={{ textAlign: 'center' }}>
-              <img src={question.title.image}></img>
+            <div style={{ textAlign: "center" }}>
+              <img src={question.title.image} style={{maxWidth:'100%'}}></img>
             </div>
           </Grid>
         ) : null}
         <Grid container item direction="row">
-          <Grid item xs={1}>
+          <Grid item xs={1} >
             <Typography variant="h6" align="left">
               <b>{"Q" + question.number + "."}</b>
             </Typography>
           </Grid>
-          <Grid item xs={11}>
-            <Typography
-              variant="h6"
-              align="left"
-              style={{ marginLeft: "-20px" }}
-            >
-              {question.title.text}
-            </Typography>
-            {question.title.explanation ? (
-              <Typography variant="subtitle1" align="left">
-                {"(" + question.title.explanation + ")"}
+          <Grid item container xs={11}  direction="column">
+            <Grid item xs>
+              <Typography
+                variant="h6"
+                align="left"                
+              >
+                {question.title.text}
               </Typography>
-            ) : null}
+            </Grid>
+            <Grid item xs>
+              {question.title.explanation ? (
+                <Typography variant="subtitle1" align="left" >
+                  {"(" + question.title.explanation + ")"}
+                </Typography>
+              ) : null}
+            </Grid>
           </Grid>
         </Grid>
-       
       </Grid>
     </div>
   );

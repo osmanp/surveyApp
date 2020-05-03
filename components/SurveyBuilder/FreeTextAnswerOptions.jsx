@@ -2,7 +2,7 @@ import { FormControl, Grid, TextField } from "@material-ui/core";
 import React from "react";
 import _ from 'lodash';
 
-const FreeTextAnswerOptions = ({optionsChanged}) => {
+const FreeTextAnswerOptions = ({optionsChanged,short}) => {
   const initialState = {    
       rows:10,
       maxCharacter:-1    
@@ -23,10 +23,10 @@ const FreeTextAnswerOptions = ({optionsChanged}) => {
     optionsChanged(newOptions);
   }  
   return (
-    <FormControl style={{ marginTop: "40px" }}>
-      <Grid container direction="column" spacing={2}>
+    <FormControl>
+      <Grid container direction="row" spacing={2}>
         {/* Title  */}
-        <Grid item xs>
+        {!short ? <Grid item xs>
           {/* number */}
           <TextField
             id="max-row"
@@ -41,9 +41,9 @@ const FreeTextAnswerOptions = ({optionsChanged}) => {
               shrink: true,
             }}
             onChange={onChange}
-            variant="outlined"
+            variant="standard"
           />
-        </Grid>
+        </Grid>   : null}     
         <Grid item xs>
           {/* number */}
           <TextField
@@ -52,14 +52,14 @@ const FreeTextAnswerOptions = ({optionsChanged}) => {
             type='number'
             style={{ margin: 8 }}
             placeholder="Maximum Character Limit"  
-            defaultValue={500}          
+            defaultValue={250}          
             fullWidth
             margin="normal"
             InputLabelProps={{
               shrink: true,
             }}
             onChange={onChange}
-            variant="outlined"
+            variant="standard"
           />
         </Grid>
       </Grid>

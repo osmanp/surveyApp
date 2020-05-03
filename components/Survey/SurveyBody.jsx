@@ -3,26 +3,52 @@ import React from "react";
 import SwipeableViews from "react-swipeable-views";
 import QuestionContainer from "../Question/QuestionContainer";
 
-const QuestionSlide = ({ questions, page, handleBack, handleNext }) => {
+const QuestionSlide = ({
+  questions,
+  page,
+  handleBack,
+  handleNext,
+  lastPage,
+}) => {
   return (
     <div page={page}>
-      <Grid container direction="column" >
+      <Grid container direction="column">
         <Grid item xs>
           {questions.map((element, index) => {
             return <QuestionContainer question={element}></QuestionContainer>;
           })}
         </Grid>
-        <Grid item xs style={{marginTop:'20px'}}>
+        <Grid item xs style={{ marginTop: "50px" }}>
           <Grid item container direction="row" justify="stretch">
             <Grid item xs={6}>
-              <Button variant="contained" color="primary" onClick={handleBack}>
-                {"< BACK"}
-              </Button>
+              {page > 0 ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleBack}
+                >
+                  {"< Back"}
+                </Button>
+              ) : null}
             </Grid>
             <Grid item container xs={6} justify="flex-end">
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {"NEXT >"}
-              </Button>
+              {!lastPage ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                >
+                  {"Next >"}
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                >
+                  {"Submit"}
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Grid>
@@ -40,6 +66,7 @@ const SurveyBody = ({ survey, questions, progressChanged }) => {
   const maxSteps = pageCount;
   progressChanged(((activeStep + 1) / maxSteps) * 100);
   const handleNext = () => {
+    window.scrollTo(0, 0)
     if (activeStep < maxSteps - 1) {
       setActiveStep(activeStep + 1);
       progressChanged(((activeStep + 1) / maxSteps) * 100);
@@ -78,6 +105,7 @@ const SurveyBody = ({ survey, questions, progressChanged }) => {
                   page={index}
                   handleBack={handleBack}
                   handleNext={handleNext}
+                  lastPage={index == (pageCount - 1)}
                 />
               );
             })}

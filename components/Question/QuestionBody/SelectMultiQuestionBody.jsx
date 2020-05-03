@@ -22,22 +22,22 @@ const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableCell = withStyles((theme) => ({
   root: {
     '&:hover':{
       backgroundColor: "#b6becc",
     }
   },
-}))(TableRow);
+}))(TableCell);
 
 const subColumns = (length, allowMultiple) => {
   if (allowMultiple) {
     return Array.from(Array(length).keys()).map((element, index) => {
-      return <TableCell component={Checkbox} size='medium'  padding='checkbox'></TableCell>;
+      return <StyledTableCell component={Checkbox} size='medium'  padding='checkbox'></StyledTableCell>;
     });
   } else {
     return Array.from(Array(length).keys()).map((element, index) => {
-      return <TableCell component={Radio} size='medium' padding='checkbox'></TableCell>;
+      return <StyledTableCell component={Radio} size='medium' padding='checkbox'></StyledTableCell>;
     });
   }
 };
@@ -45,7 +45,8 @@ const subColumns = (length, allowMultiple) => {
 const SelectMultiQuestionBody = ({ body }) => {
   const classes = useStyles();
   return (
-    <TableContainer style={{ maxWidth: "100%", maxHeight: "100%" ,marginTop:'-50px'}}>
+  
+    <TableContainer style={{ maxWidth: "850px", maxHeight: "100%" }}>
       <TableHead>
         <TableCell component={Typography}></TableCell>
         {body.columns.map((element, index) => {
@@ -59,10 +60,10 @@ const SelectMultiQuestionBody = ({ body }) => {
       <TableBody>
         {body.rows.map((element, index) => {
           return (
-            <StyledTableRow key={element.id}>
-              <TableCell component={Typography}>{element.label}</TableCell>
+            <TableRow key={element.id}>
+              <StyledTableCell component={Typography}>{element.label}</StyledTableCell>
               {subColumns(body.columns.length, body.allowMultiple)}
-            </StyledTableRow>
+            </TableRow>
           );
         })}
       </TableBody>
