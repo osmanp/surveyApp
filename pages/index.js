@@ -11,8 +11,10 @@ import SurveyTitleForm from "../components/SurveyBuilder/SurveyTitleForm";
 import SurveyBuilder from "../components/SurveyBuilder/SurveyBuilder";
 
 export default function Home() {
+  const survey = Surveys[0];
+  survey.body.questions=Questions;
   return (
-      <Container >
+      <Container style={{minHeight:'1200px'}}>
         {/* <QuestionContainer question={Questions[0]}></QuestionContainer>
         <QuestionContainer question={Questions[1]}></QuestionContainer>
         <QuestionContainer question={Questions[2]}></QuestionContainer>
@@ -22,8 +24,8 @@ export default function Home() {
 {/* 
         <QuestionContainer question={Questions[6]}></QuestionContainer> */}
 
+       {/* <SurveyContainer survey={survey}></SurveyContainer>     */}
        <SurveyBuilder></SurveyBuilder>
-       
-      </Container>    
+      </Container>        
   );
 }

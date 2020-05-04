@@ -32,6 +32,7 @@ const SurveyTitle = ({ survey,progress }) => {
     <Paper elevation={1} variant='outlined' style={{padding:'10px',
     margin:'4px',
     marginTop: "20px",
+    borderRadius:'20px',
     border:'0.04rem solid'}}>
     <Grid container direction="column" spacing={2}>
         <Grid item xs={12} style={{ minHeight: "100px" }}>

@@ -8,7 +8,7 @@ import {
 import React from "react";
 import _ from "lodash";
 
-const SliderAnswerOptions = ({ optionsChanged }) => {
+const SliderAnswerOptions = ({ type, optionsChanged }) => {
   const initialState = {
     variant: "default",
     defaultValue: 5,
@@ -17,7 +17,11 @@ const SliderAnswerOptions = ({ optionsChanged }) => {
     step: 1,
     minLabel: "Not happy",
     maxLabel: "Very happy",
+    variant:type.replace('-slider','')
   };
+  React.useEffect(() => {
+    optionsChanged(initialState);
+  } ,[]);
   const [options, setOptions] = React.useState(initialState);
 
   const onChange = (event) => {
@@ -40,10 +44,7 @@ const SliderAnswerOptions = ({ optionsChanged }) => {
         break;
       case "step-value":
         newOptions.step = parseInt(event.target.value);
-        break;
-      case "type":
-        newOptions.variant = event.target.checked ? "discrete" : "default";
-        break;
+        break;      
     }
     setOptions(newOptions);
     optionsChanged(newOptions);

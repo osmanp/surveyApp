@@ -52,12 +52,13 @@ const SurveyTitleForm = ({ handlers }) => {
   return (
     <Container maxWidth="md">
       <Paper
-        elevation={1}
+        elevation={4}
         variant="elevation"
         style={{
           margin: "4px",
           marginTop: "20px",
-          border: "0.04rem solid",
+          maxWidth:'100%',
+          borderRadius:'20px'
         }}
       >
         <FormControl
@@ -120,7 +121,7 @@ const SurveyTitleForm = ({ handlers }) => {
                       color="secondary"
                     />
                   }
-                  labelPlacement="left"
+                  labelPlacement="start"
                   label="Show question count"
                 />
               </Grid>
@@ -136,7 +137,7 @@ const SurveyTitleForm = ({ handlers }) => {
                       color="secondary"
                     />
                   }
-                  labelPlacement="left"
+                  labelPlacement="start"
                   label="Show progress"
                 />
               </Grid>
@@ -152,7 +153,7 @@ const SurveyTitleForm = ({ handlers }) => {
                       color="secondary"
                     />
                   }
-                  labelPlacement="left"
+                  labelPlacement="start"
                   label="Show estimated time"
                 />
               </Grid>

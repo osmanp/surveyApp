@@ -12,6 +12,7 @@ import FreeTextQuestionBody from "./QuestionBody/FreeTextQuestionBody";
 import SelectSingleQuestionBody from "./QuestionBody/SelectSingleQuestionBody";
 import SelectMultiQuestionBody from "./QuestionBody/SelectMultiQuestionBody";
 import SliderQuestionBody from "./QuestionBody/SliderQuestionBody";
+import DateTimeQuestionBody from "./QuestionBody/DateTimeQuestionBody";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "4px",
     marginTop: "20px",
     border: "0.04rem solid #70757a",
+    padding:'10px'
   },
   answerBox: {},
 }));
@@ -33,7 +35,7 @@ const getAnswerType = (type, question) => {
       return <SelectMultiQuestionBody body={question.body}></SelectMultiQuestionBody>
     case "slider":
       return <SliderQuestionBody body={question.body}></SliderQuestionBody>;
-    case "date-teim":
+    case "date-time":
       return <DateTimeQuestionBody body={question.body}></DateTimeQuestionBody>
     default:
       break;
@@ -41,10 +43,9 @@ const getAnswerType = (type, question) => {
 };
 
 const QuestionContainer = ({ question }) => {
-  const classes = useStyles();
-  console.log(question);
+  const classes = useStyles();  
   return (
-    <Paper className={classes.root} variant="elevation" elevation={3}>
+    <Paper className={classes.root} variant="elevation" elevation={3} style={{borderRadius:'20px'}}>
       <Grid
         container
         direction="column"

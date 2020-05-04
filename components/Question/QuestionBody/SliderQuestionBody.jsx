@@ -56,7 +56,7 @@ const getRadioSlider = (step, min, max) => {
       >
         {Array.from(Array(max  / step).keys()).map((element, index) => {
           return (
-            <Grid item xs>
+            <Grid item xs={1}>
               <FormControlLabel
                 control={<Radio size='medium'
                 checked={selectedIndex === (element)}
@@ -76,7 +76,7 @@ const getRadioSlider = (step, min, max) => {
 
 const getRatingSlider = (defaultValue, max) => {
   return <div style={{alignContent:'center'}}>
-    <Rating defaultValue={defaultValue} max={max} ></Rating>;
+    <Rating defaultValue={defaultValue} max={max} ></Rating>
   </div>
 };
 
@@ -139,8 +139,8 @@ const getGridSlider = (step, min, max) => {
   );
 };
 
-const slider = (type, defaultValue, step, min, max) => {
-  switch (type) {
+const slider = (variant, defaultValue, step, min, max) => {
+  switch (variant) {
     case "grid":
       return getGridSlider(step, min, max);
     case "lineer":
@@ -151,7 +151,6 @@ const slider = (type, defaultValue, step, min, max) => {
       return getRatingSlider(defaultValue, max);
     default:
       return getGridSlider(step, min, max);
-      break;
   }
 };
 

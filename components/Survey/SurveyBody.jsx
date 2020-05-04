@@ -57,7 +57,7 @@ const QuestionSlide = ({
   );
 };
 
-const SurveyBody = ({ survey, questions, progressChanged }) => {
+const SurveyBody = ({ survey, progressChanged }) => {
   const pageCount = Math.ceil(
     survey.body.questions.length / survey.body.questionPerPage
   );
@@ -85,19 +85,19 @@ const SurveyBody = ({ survey, questions, progressChanged }) => {
   };
 
   return (
-    <Container>
+    <Container maxWidth='md'>
       <Grid container direction="column" spacing={3}>
         <Grid item xs>
           <SwipeableViews
             axis={"x"}
             index={activeStep}
             onChangeIndex={handleStepChange}
-            enableMouseEvents
+            enableMouseEvents            
           >
             {Array.from(Array(pageCount).keys()).map((element, index) => {
               return (
                 <QuestionSlide
-                  questions={questions.slice(
+                  questions={survey.body.questions.slice(
                     index * survey.body.questionPerPage,
                     index * survey.body.questionPerPage +
                       survey.body.questionPerPage

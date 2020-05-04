@@ -52,11 +52,5 @@ const QuestionTitle = ({ question }) => {
   );
 };
 
-QuestionTitle.propTypes = {
-  question: PropTypes.shape({
-    text: PropTypes.string,
-    number: PropTypes.string,
-  }),
-};
 
 export default QuestionTitle;

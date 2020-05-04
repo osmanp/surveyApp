@@ -1,4 +1,19 @@
-import { Container, Divider, FormControl, FormControlLabel, Grid, ListItemIcon, ListItemText, ListSubheader, MenuItem, Paper, Select, Switch, TextField, Typography } from "@material-ui/core";
+import {
+  Container,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  MenuItem,
+  Paper,
+  Select,
+  Switch,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -16,6 +31,8 @@ import FreeTextAnswerOptions from "./FreeTextAnswerOptions";
 import SelectAnswerOptions from "./SelectAnswerOptions";
 import SelectMultiAnswerOptions from "./SelectMultiAnswerOptions";
 import SliderAnswerOptions from "./SliderAnswerOptions";
+
+import QuestionFormActions from "./QuestionFormActions";
 
 const AnswerOptions = (type, optionsChanged) => {
   switch (type) {
@@ -48,6 +65,7 @@ const AnswerOptions = (type, optionsChanged) => {
     case "radio-slider":
       return (
         <SliderAnswerOptions
+          type={type}
           optionsChanged={optionsChanged}
         ></SliderAnswerOptions>
       );
@@ -110,47 +128,79 @@ const MenuItemTypo = (text, value, icon) => {
   );
 };
 
-const QuestionForm = ({ handlers }) => {
-  let initalState = {
-    id: 1,
-    type: "free-text",
-    number: "1",
-    title: {
-      text: "Question Body",
-      explanation: "",
-    },
-    body: {
-      freeTextOptions: {
-        rows: 20,
-        helperText: "Write less than 250 words",
-      },
-    },
-  };
-  const [question, setQuestion] = React.useState(initalState);
+const QuestionForm = ({ questionTemplate, handlers }) => {
+  const [question, setQuestion] = React.useState(questionTemplate);
   const [type, setType] = React.useState("short-answer");
 
+  React.useEffect(() => {
+    setQuestion(questionTemplate);
+  }, [questionTemplate]);
+
   const optionsChanged = (options) => {
-    console.log(options);
     let newQuestion = _.cloneDeep(question);
     newQuestion.body = options;
     setQuestion(newQuestion);
     handlers.updateQuestion(newQuestion);
   };
   const handleChange = (event) => {
+    let newQuestion = _.cloneDeep(question);
+    switch (event.target.value) {
+      case "short-answer":
+      case "long-answer":
+        newQuestion.type = "free-text";
+        break;
+      case "single-select-radio":
+      case "single-select-checkbox":
+      case "single-select-dropdown":
+        newQuestion.type = "select";
+        break;
+      case "rating-slider":
+      case "grid-slider":
+      case "lineer-slider":
+      case "radio-slider":
+        newQuestion.type = "slider";
+        break;
+      case "liken-radio":
+      case "liken-checkbox":
+        newQuestion.type = "select-multi";
+        break;
+      case "date":
+      case "time":
+        newQuestion.type = "date-time";
+      default:
+        break;
+    }
     setType(event.target.value);
+    setQuestion(newQuestion);
+    handlers.updateQuestion(newQuestion);
   };
   const handleTitleChange = (event) => {
     let newQuestion = _.cloneDeep(question);
     switch (event.target.id) {
       case "question-text":
-        newOptions.title.text = event.target.value;
+        newQuestion.title.text = event.target.value;
         break;
       case "question-description":
-        newOptions.maxCharacter = event.target.value;
+        newQuestion.maxCharacter = event.target.value;
         break;
     }
     setQuestion(newQuestion);
     handlers.updateQuestion(newQuestion);
+  };
+  const handleActions = (event) => {
+    switch (event) {
+      case "Delete":
+        handlers.handleActions("Delete");
+        break;
+      case "Clear":
+        break;
+      case "Copy":
+        handlers.handleActions("Copy");
+        break;
+
+      default:
+        break;
+    }
   };
   return (
     <Container maxWidth="md">
@@ -160,6 +210,8 @@ const QuestionForm = ({ handlers }) => {
         style={{
           margin: "4px",
           marginTop: "20px",
+          maxWidth: "100%",
+          borderRadius:'20px'
         }}
       >
         <Grid
@@ -200,7 +252,16 @@ const QuestionForm = ({ handlers }) => {
                     onChange={handleTitleChange}
                   />
                 </Grid>
-                <Grid item container xs direction="row" alignContent='stretch' alignItems='center' justify='flex-start' spacing={2}>
+                <Grid
+                  item
+                  container
+                  xs
+                  direction="row"
+                  alignContent="stretch"
+                  alignItems="center"
+                  justify="flex-start"
+                  spacing={2}
+                >
                   <Grid item xs={6}>
                     {/* explanation */}
                     <TextField
@@ -311,6 +372,14 @@ const QuestionForm = ({ handlers }) => {
             }}
           >
             {AnswerOptions(type, optionsChanged)}
+          </Grid>
+          <Grid item xs>
+            <Divider></Divider>
+          </Grid>
+          <Grid item xs>
+            <QuestionFormActions
+              formActionHandler={handleActions}
+            ></QuestionFormActions>
           </Grid>
         </Grid>
       </Paper>

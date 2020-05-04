@@ -6,7 +6,7 @@ export const ThemeTypes = {
 }
 
 export const availableThemes = {
-	[ThemeTypes.DARK]: {
+	[ThemeTypes.DARK]: {		
 		palette: {
 			text:{
 				primary:lightGreen[100],
@@ -39,7 +39,7 @@ export const availableThemes = {
 				main: red.A400,
 			},
 			background:{
-				default: '#F5F5F5',
+				default: grey[300],
 				primary:'#F5F5F5',
 				paper:'#F5F5F5'
 			}

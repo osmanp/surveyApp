@@ -11,13 +11,14 @@ const DateTimeQuestionBody = ({ body }) => {
   return (
     <div
       className={classes.root}
-      style={{ minWidth: "100%", textAlign: "center" }}
+      style={{ minWidth: "100%", textAlign: "left",marginLeft:'80px' }}
     >
       {body.type == "date" ? (
         <TextField
           id="date"
           label={body.label}
           type="date"
+          style={{minWidth:'80px'}}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -28,6 +29,7 @@ const DateTimeQuestionBody = ({ body }) => {
           id="date"
           label={body.label}
           type="time"
+          style={{minWidth:'80px'}}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
