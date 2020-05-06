@@ -1,6 +1,8 @@
 import { Container } from "@material-ui/core";
 import QuestionBuildBlocks from "../components/QuestionBuilder/QuestionBuildBlocks";
-
+import SurveyOptionsForm from "../components/SurveyBuilder/SurveyOptionsForm";
+import SurveyBuilder from "../components/SurveyBuilder/SurveyBuilder";
+import Layout from '../components/Layout';
 export default function Home() {
   // const survey = Surveys[0];
   // survey.body.questions=Questions;
@@ -79,7 +81,8 @@ export default function Home() {
   //   setState( 9);    
   // };
   return (
-      <Container style={{minHeight:'1200px'}}>
+    <Layout>
+ <Container style={{minHeight:'1200px'}}>
         {/* <QuestionContainer question={Questions[0]}></QuestionContainer>
         <QuestionContainer question={Questions[1]}></QuestionContainer>
         <QuestionContainer question={Questions[2]}></QuestionContainer>
@@ -91,8 +94,8 @@ export default function Home() {
 
        {/* <SurveyContainer survey={survey}></SurveyContainer>     */}
        
-       <QuestionBuildBlocks questions={[]}  handler={{updateQuestions: (questions) => {console.log(questions);}}} ></QuestionBuildBlocks>
-
+       {/* <QuestionBuildBlocks questions={[]}  handler={{updateQuestions: (questions) => {console.log(questions);}}} ></QuestionBuildBlocks> */}
+        <SurveyBuilder></SurveyBuilder>
        {/* <QuestionTemplate initialQuestionTemplate={{}} handlers={{updateQuestion:() => {}}}></QuestionTemplate> */}
         {/* <QuestionTemplate  handlers={handlers}  initialQuestionTemplate={question} initialTemplateType={type}></QuestionTemplate> */}
        {/* <Paper style={{marginTop:'90px'}}>
@@ -102,5 +105,7 @@ export default function Home() {
           Clear
        </Button> */} 
       </Container>        
+    </Layout>
+     
   );
 }

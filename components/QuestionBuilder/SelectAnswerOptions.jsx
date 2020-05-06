@@ -95,11 +95,11 @@ const SelectAnswerOptions = ({ type, initialOptions, optionsChanged }) => {
             direction="row"
             spacing={2}
             alignContent="flex-start"
-            justify="center"
+            justify="space-between"
             alignItems="center"
 
           >
-            <Grid item xs={7}>
+            <Grid item xs={6}>
               <TextField
                 id="answer"
                 label="answer"
@@ -132,22 +132,25 @@ const SelectAnswerOptions = ({ type, initialOptions, optionsChanged }) => {
                 onChange={onChange}
               />
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={2}>
               <Button
-                variant="contained"
                 color="secondary"
+                variant='outlined'
+                size='small'
                 onClick={handleAddNewOption}
               >
                 Add
               </Button>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs>
               {type != 'single-select-dropdown' ? <Button
-                variant="contained"
                 color="secondary"
+                variant='outlined'
+                size='small'                
                 onClick={handleAddOther}
               >
-                Add Other
+                <Typography variant='caption' >Add Other</Typography>
+                
               </Button> : null}
             </Grid>
           </Grid>

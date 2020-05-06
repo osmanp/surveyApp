@@ -1,8 +1,11 @@
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Hidden } from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
+import QuestionBuildBlocks from '../QuestionBuilder/QuestionBuildBlocks';
 import QuestionBuildForm from "../QuestionBuilder/QuestionBuildForm";
 import SurveyTitleForm from "./SurveyTitleForm";
+import SurveyOptionsForm from './SurveyOptionsForm';
+import SurveyBuilderSpeedDial from "./SurveyBuilderSpeedDial";
 const uuid = require("uuid");
 
 const SurveyBuilder = () => {
@@ -31,7 +34,7 @@ const SurveyBuilder = () => {
     },
   };
 
-  const [questionBlocks,setQuestionBlocks] = React.useState([]);
+  const [questionBlocks, setQuestionBlocks] = React.useState([]);
   const [survey, setSurvey] = React.useState(initialSurvey);
   const [questionTemplate, setQuestionTemplate] = React.useState(
     initialQuestion
@@ -46,19 +49,19 @@ const SurveyBuilder = () => {
     const newQuestion = _.cloneDeep(question);
     setQuestionTemplate(newQuestion);
   };
-  const handleActions = (event, senderID) => {    
+  const handleActions = (event, senderID) => {
     switch (event) {
       case "Add":
         {
           const newBlocks = Array.from(questionBlocks);
           const newQuestion = _.cloneDeep(questionTemplate);
           newQuestion.id = uuid.v4();
-          newQuestion.number = newBlocks.findIndex(s => s.question.id == senderID) + 1;          
+          newQuestion.number = newBlocks.findIndex(s => s.question.id == senderID) + 1;
 
-          newBlocks.push({state:'view', question:newQuestion});
-          for(var i = 0 ; i <  newBlocks.length ; i++){
+          newBlocks.push({ state: 'view', question: newQuestion });
+          for (var i = 0; i < newBlocks.length; i++) {
             const currentNumber = newBlocks[i].question.number;
-            if(currentNumber <= newQuestion.number){
+            if (currentNumber <= newQuestion.number) {
               newBlocks[i].question.number++;
             }
           }
@@ -101,43 +104,36 @@ const SurveyBuilder = () => {
     }
   };
   const handlers = {
-    updateQuestion: handleQuestionUpdate,
+    updateQuestions: handleQuestionUpdate,
     updateTitle: handleTitleUpdate,
     handleActions: handleActions,
   };
 
   return (
-    <Container maxWidth="md" style={{ marginBottom: "1200px" }}>
-      <Grid
-        container
-        direction="column"
-        alignItems="stretch"
-        alignContent="stretch"
-        justify="center"
-        spacing={2}
-      >
-        <Grid item xs={12}>
-          <SurveyTitleForm handlers={handlers}></SurveyTitleForm>
-        </Grid>
-        <Grid item xs={12} container direction="column">
-          <Container maxWidth="md">
-            {survey.body.questions.map((element, index) => {
-              return (
-                <QuestionBuildForm key={index} state={'view'} question={element} templateType={'short-answer'} handlers={handlers} >
+    <div>
 
-                </QuestionBuildForm>
-              );
-            })}
-          </Container>
-
-          <Grid item xs>
-            <QuestionBuildForm state={'edit'} question={questionTemplate} templateType={'short-answer'} handlers={handlers} >
-            </QuestionBuildForm>
+      
+      <Container maxWidth="lg" >
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          spacing={1}
+        >
+           
+          <Grid item xs={12}>
+            <SurveyTitleForm handlers={handlers}></SurveyTitleForm>
           </Grid>
-
+          <Grid item xs={12} container direction="column">
+            <QuestionBuildBlocks></QuestionBuildBlocks>
+          </Grid>
+          <Grid item xs={12}>
+            <SurveyBuilderSpeedDial eventHandler={handlers}></SurveyBuilderSpeedDial>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+      <SurveyOptionsForm></SurveyOptionsForm>
+    </div>
   );
 };
 

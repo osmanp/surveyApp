@@ -1,10 +1,8 @@
-import { Container, makeStyles,IconButton, Paper } from "@material-ui/core";
+import { Container, Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@material-ui/lab";
-import EditIcon from '@material-ui/icons/Edit';
 
 const actions = [
   {
@@ -27,34 +25,24 @@ const SurveyBuilderSpeedDial = ({ eventHandler }) => {
   const classes = useStyles();
   return (
     <Container maxWidth="xs" style={{ marginTop: "20px" }}>
-      <Paper variant='elevation' elevation={2} style={{borderRadius:'20px'}}>
-      {/* <SpeedDial
-        ariaLabel="SpeedDial example"
-        hidden={false}
-        icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
-        open={open}
-        direction="right"
-        FabProps={{
-          color: "secondary",
-          size: "large"          
-        }}        
-      > */}
-        {actions.map((action) => {
-          
-          return (
-            <IconButton
-              key={action.name}
-              
-              tooltipTitle={action.name}
-              onClick={() => eventHandler(action.name)}
-              TooltipClasses={classes}
-            >{action.icon}
-              </IconButton>
-          );
-        })}
-        </Paper>
+      <Paper variant='elevation' elevation={2} style={{ borderRadius: '20px' }}>
+        <Grid container direction='row'>
+          {actions.map((action) => {
+            return (
+              <Grid key={action.name} item xs>
+                <IconButton
+                  key={action.name}
+
+                  tooltipTitle={action.name}
+                  onClick={() => eventHandler(action.name)}
+                  TooltipClasses={classes}
+                >{action.icon}
+                </IconButton>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Paper>
       {/* </SpeedDial> */}
     </Container>
   );

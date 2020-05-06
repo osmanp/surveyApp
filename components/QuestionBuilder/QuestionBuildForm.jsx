@@ -3,86 +3,54 @@ import QuestionContainer from '../Question/QuestionContainer';
 import QuestionForm from './QuestionForm';
 import QuestionFormActions from './QuestionFormActions';
 
-const getViewComponent = (handlers, question) => {
-    const [hovering, setHovering] = React.useState(false);
+const getViewComponent = (question) => {
+    return <QuestionContainer question={question}></QuestionContainer>;
+};
+const getEditComponent = (handlers, question) => {
     return (
-        <div
-            style={{ cursor: "pointer" }}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}   >
-            <Grid container direction='row'>
-                <Grid item xs={3}>
-                    <Grid>
+        <QuestionForm initialQuestionTemplate={question} handlers={handlers}></QuestionForm>
+    );
+};
+
+const QuestionBuildForm = ({ state, question, autoChange, handlers }) => {
+    const [hovering, setHovering] = React.useState(false);
+    const [viewState, setViewState] = React.useState(state === 'view');
+    React.useEffect(() => {
+        setViewState(state == 'view');
+    }, [state]);
+    const handleMouseLeave = () => {        
+        setHovering(false);
+        if (autoChange && state == 'edit') {           
+            setViewState(true);
+            handlers.updateState(viewState, question.id);
+        }
+    };
+    return (
+        <>
+            <div
+                style={{ cursor: "pointer" }}
+                onMouseEnter={() => setHovering(true)}
+                onMouseLeave={handleMouseLeave}   >
+                <Grid container direction='row'>
+                    <Grid item xs={2} alignContent='flex-end' style={{ textAlign: 'right' }}>
                         <Grow direction="up" in={hovering} mountOnEnter unmountOnExit>
                             <QuestionFormActions
                                 eventHandler={handlers.handleActions}
                                 senderID={question.id}
-                                group={1}
+                                group={viewState ? 1 : 2}
                             ></QuestionFormActions>
                         </Grow >
                     </Grid>
-                </Grid>
-                <Grid item xs={9}>
-                    <QuestionContainer question={question}></QuestionContainer>
-                </Grid>
-            </Grid>
-            {/* {hovering ? (
-                <Grid item xs={12}>
-                    <QuestionFormActions
-                        eventHandler={handlers.handleActions}
-                        senderID={question.id}
-                        group={1}
-                    ></QuestionFormActions>
-                </Grid>
-            ) : null} */}
-        </div>
-    );
-};
-const getEditComponent = (handlers, question) => {
-    const [hovering, setHovering] = React.useState(false);
-    return (
-        <div
-            style={{ cursor: "pointer" }}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}   >
-            <Grid container direction='row'>
-                
-                    <Grid item xs={3}>
-                    <Grow direction="up" in={hovering} mountOnEnter unmountOnExit>
-                        <QuestionFormActions
-                            eventHandler={handlers.handleActions}
-                            senderID={question.id}
-                            group={2}
-                        ></QuestionFormActions>
-                         </Grow >
+                    <Grid item xs={8}>
+                        {
+                            viewState ?
+                                getViewComponent(question) : getEditComponent(handlers, question)
+                        }
                     </Grid>
-               
-                <Grid item xs={9}>
-                    <QuestionForm initialQuestionTemplate={question} handlers={handlers}></QuestionForm>
+                    <Grid item xs={2}></Grid>
                 </Grid>
+            </div>
 
-                {/* {hovering ? (
-                <Grid item xs={12}>
-                    <QuestionFormActions
-                        eventHandler={handlers.handleActions}
-                        senderID={question.id}
-                        group={2}
-                    ></QuestionFormActions>
-                </Grid>
-            ) : null} */}
-            </Grid>
-        </div>
-    );
-};
-
-const QuestionBuildForm = ({ state, question, handlers }) => {
-
-    return (
-        <>
-            {
-                state == 'view' ?
-                    getViewComponent(handlers, question) : getEditComponent(handlers, question)
-            }
         </>);
 };
 

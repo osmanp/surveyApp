@@ -111,8 +111,9 @@ const SelectMultiAnswerOptions = ({ type, initialOptions, optionsChanged }) => {
               </Grid>
               <Grid item xs={2}>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
+                  size='small'
                   onClick={handleAddNewRow}
                 >
                   Add

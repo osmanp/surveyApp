@@ -44,11 +44,10 @@ const useStyles = makeStyles({
   }
 });
 const QuestionFormActions = ({ eventHandler, senderID, group }) => {
-  const classes = useStyles();
-  const width = group == 1 ? '40%' : '20%';
+  const classes = useStyles();  
   return (
     <Container style={{ marginTop: '20px' }}>
-      <Paper variant='elevation' elevation={4} style={{ borderRadius: '20px',maxWidth:'50%' }}>
+      <Paper variant='elevation' elevation={4} style={{ borderRadius: '20px',maxWidth:'80%' }}>
         <Grid container direction='row' justify='flex-start'>
 
           {actions.filter(a => ~a.groups.indexOf(group)).map((action) => {

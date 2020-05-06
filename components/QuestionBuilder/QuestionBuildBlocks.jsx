@@ -105,6 +105,7 @@ const QuestionBuildBlocks = ({ questions, handler }) => {
                 const senderBlockIndex = blocks.findIndex(s => s.question.id == senderID);
                 newBlocks[senderBlockIndex].state = 'edit';
                 setBlocks(newBlocks);
+                console.log(newBlocks);
             }
                 break;
             case "Save": {
@@ -129,14 +130,21 @@ const QuestionBuildBlocks = ({ questions, handler }) => {
                 break;
         }
     };
+    const handleUpdateState = (viewState,senderID) => {
+        const newBlocks = Array.from(blocks);
+        const senderBlockIndex = newBlocks.findIndex(s => s.question.id == senderID);
+        newBlocks[senderBlockIndex].state = viewState ? 'view' : 'edit';
+        setBlocks(newBlocks);
+    };
     const handlers = {
         updateQuestion: handleQuestionUpdate,
         handleActions: handleQuestionActions,
+        updateState: handleUpdateState
     };
 
 
     return (
-        <Container maxWidth="lg" style={{ marginBottom: "1200px" }}>
+        <Container maxWidth="lg">
             <Grid
                 container
                 direction="column"
@@ -149,13 +157,13 @@ const QuestionBuildBlocks = ({ questions, handler }) => {
                     <Container maxWidth="lg">
                         {blocks.map((element) => {
                             return (
-                                <QuestionBuildForm key={element.id} state={element.state} question={element.question} handlers={handlers} >
+                                <QuestionBuildForm key={element.id} state={element.state} autoChange={true} question={element.question} handlers={handlers} >
                                 </QuestionBuildForm>
                             );
                         })}
                     </Container>
                     <Grid item xs={12}>
-                        <QuestionBuildForm state={'edit'} question={activeTemplate} handlers={handlers} >
+                        <QuestionBuildForm state={'edit'} question={activeTemplate} autoChange={false} handlers={handlers} >
                         </QuestionBuildForm>
                     </Grid>
                 </Grid>
