@@ -1,50 +1,69 @@
-import {
-  FormControl,
-  Grid,
-  TextField,
-  Switch,
-  FormControlLabel,
-} from "@material-ui/core";
-import React from "react";
+import { FormControl, Grid, TextField } from "@material-ui/core";
 import _ from "lodash";
+import React from "react";
 
-const SliderAnswerOptions = ({ type, optionsChanged }) => {
+const SliderAnswerOptions = ({ type, initialOptions, optionsChanged }) => {
+  
   const initialState = {
-    variant: "default",
-    defaultValue: 5,
-    min: 0,
-    max: 10,
-    step: 1,
-    minLabel: "Not happy",
-    maxLabel: "Very happy",
-    variant:type.replace('-slider','')
+    defaultValue: initialOptions.defaultValue || 5,
+    min: initialOptions.min || 1,
+    max: initialOptions.max || 10,
+    step: initialOptions.step || 1,
+    minLabel: initialOptions.minLabel || "Not happy",
+    maxLabel: initialOptions.maxLabel || "Very Happy",
+    variant: (type ? type.replace('-slider', '') : 'grid') 
   };
-  React.useEffect(() => {
-    optionsChanged(initialState);
-  } ,[]);
-  const [options, setOptions] = React.useState(initialState);
 
+  React.useEffect(() => {
+    setMinval(initialState.min);
+    setMaxVal(initialState.max);
+    setMinLabel(initialState.minLabel);
+    setMaxLabel(initialState.maxLabel);
+    setDefaultVal(initialState.defaultValue);
+    setStepVal(initialState.step);    
+  }, [initialOptions]);
+
+  
+
+  const [minVal, setMinval] = React.useState(initialState.min);
+  const [maxVal, setMaxVal] = React.useState(initialState.max);
+  const [defaultVal, setDefaultVal] = React.useState(initialState.defaultValue);
+  const [minLabel, setMinLabel] = React.useState(initialState.minLabel);
+  const [maxLabel, setMaxLabel] = React.useState(initialState.maxLabel);
+  const [stepVal, setStepVal] = React.useState(initialState.step);
+
+  const [options, setOptions] = React.useState(initialState);
+  React.useEffect(() => {
+    optionsChanged(options);
+  },[options]);
+  
   const onChange = (event) => {
     let newOptions = _.cloneDeep(options);
     switch (event.target.id) {
       case "min-value":
         newOptions.min = parseInt(event.target.value);
+        setMinval(newOptions.min);
         break;
       case "max-value":
         newOptions.max = parseInt(event.target.value);
+        setMaxVal(newOptions.max);
         break;
       case "min-label":
         newOptions.minLabel = event.target.value;
+        setMinLabel(newOptions.minLabel);
         break;
       case "max-label":
         newOptions.maxLabel = event.target.value;
+        setMaxLabel(newOptions.maxLabel);
         break;
       case "default-value":
         newOptions.defaultValue = parseInt(event.target.value);
+        setDefaultVal(newOptions.defaultValue);
         break;
       case "step-value":
         newOptions.step = parseInt(event.target.value);
-        break;      
+        setStepVal(newOptions.step);
+        break;
     }
     setOptions(newOptions);
     optionsChanged(newOptions);
@@ -60,7 +79,7 @@ const SliderAnswerOptions = ({ type, optionsChanged }) => {
               label="Minimum value label"
               type="string"
               style={{ margin: 8 }}
-           
+              value={minLabel}
               fullWidth
               margin="normal"
               InputLabelProps={{
@@ -76,7 +95,7 @@ const SliderAnswerOptions = ({ type, optionsChanged }) => {
               label="Maximum value label"
               type="string"
               style={{ margin: 8 }}
- 
+              value={maxLabel}
               fullWidth
               margin="normal"
               InputLabelProps={{
@@ -96,6 +115,7 @@ const SliderAnswerOptions = ({ type, optionsChanged }) => {
               style={{ margin: 8 }}
               placeholder="Minimum value"
               defaultValue={options.min}
+              value={minVal}
               fullWidth
               margin="normal"
               InputLabelProps={{
@@ -115,6 +135,7 @@ const SliderAnswerOptions = ({ type, optionsChanged }) => {
               placeholder="Maximum value"
               defaultValue={options.max}
               fullWidth
+              value={maxVal}
               margin="normal"
               InputLabelProps={{
                 shrink: true,
@@ -132,6 +153,7 @@ const SliderAnswerOptions = ({ type, optionsChanged }) => {
               placeholder="Default value"
               defaultValue={options.defaultValue}
               fullWidth
+              value={defaultVal}
               margin="normal"
               InputLabelProps={{
                 shrink: true,
@@ -149,6 +171,7 @@ const SliderAnswerOptions = ({ type, optionsChanged }) => {
               placeholder="Step value"
               defaultValue={options.step}
               fullWidth
+              value={stepVal}
               margin="normal"
               InputLabelProps={{
                 shrink: true,

@@ -1,0 +1,12 @@
+{
+    "beautify.config": "",
+    // You can auto format any files based on the file extensions type.
+    "beautify.JSfiles": [
+        "js",
+        "json",
+        "jsbeautifyrc",
+        "jshintrc",
+        "ts"
+    ],
+    "html.format.wrapAttributes": "aligned-multiple"
+}

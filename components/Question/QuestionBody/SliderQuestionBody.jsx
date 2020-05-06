@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#4d5c78",
     },
   },
-  radio:{
+  radio: {
     "&:hover": {
       backgroundColor: "#4d5c78",
     }
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const getRadioSlider = (step, min, max) => {
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const handleClick = (index) => {
-    if ((index) => min && index <= max) {
+    if (index <= min && index <= max) {
       setSelectedIndex(index);
     }
     if (index == selectedIndex) {
@@ -45,39 +45,40 @@ const getRadioSlider = (step, min, max) => {
   };
   const classes = useStyles();
   return (
-    
-      <Grid
-        item
-        container
-        direction="row"
-        alignItems="center"
-        alignContent="center"
-        justify="center"
-      >
-        {Array.from(Array(max  / step).keys()).map((element, index) => {
-          return (
-            <Grid item xs={1}>
-              <FormControlLabel
-                control={<Radio size='medium'
+
+    <Grid
+      item
+      container
+      direction="row"
+      alignItems="center"
+      alignContent="center"
+      justify="center"
+    >
+      {Array.from(Array(max / step).keys()).map((element, index) => {
+        return (
+          <Grid item xs={1} key={index}>
+            <FormControlLabel
+              control={<Radio
+                size='medium'
                 checked={selectedIndex === (element)}
                 onChange={() => handleClick(index)}
-                >
-                </Radio>}
-                label={element + min}
-                labelPlacement='top'
-                className={classes.radio}
-              ></FormControlLabel>
-            </Grid>
-          );
-        })}
-      </Grid>    
+              >
+              </Radio>}
+              label={element + min}
+              labelPlacement='top'
+              className={classes.radio}
+            ></FormControlLabel>
+          </Grid>
+        );
+      })}
+    </Grid>
   );
 };
 
 const getRatingSlider = (defaultValue, max) => {
-  return <div style={{alignContent:'center'}}>
+  return <div style={{ alignContent: 'center' }}>
     <Rating defaultValue={defaultValue} max={max} ></Rating>
-  </div>
+  </div>;
 };
 
 const getLineerSlider = (defaultValue, step, min, max) => {
@@ -97,7 +98,7 @@ const getLineerSlider = (defaultValue, step, min, max) => {
 const getGridSlider = (step, min, max) => {
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const handleClick = (index) => {
-    if ((index) => min && index <= max) {
+    if (index <= min && index <= max) {
       setSelectedIndex(index);
     }
     if (index == selectedIndex) {
@@ -115,9 +116,9 @@ const getGridSlider = (step, min, max) => {
       alignContent="center"
       justify="center"
     >
-      {Array.from(Array(max  / step).keys()).map((element, index) => {
+      {Array.from(Array(max / step).keys()).map((element, index) => {
         return (
-          <Grid item xs>
+          <Grid item xs key={index}>
             <Paper elevation={2} onClick={() => handleClick(index)}>
               <Typography
                 id="discrete-slider"

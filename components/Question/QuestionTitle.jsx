@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { Grid, TextField, Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -8,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "24px",
     flexGrow: 1,
     flexFlow: 1,
-  },
+  },  
 }));
 
 const QuestionTitle = ({ question }) => {
@@ -25,8 +24,9 @@ const QuestionTitle = ({ question }) => {
         ) : null}
         <Grid container item direction="row">
           <Grid item xs={1} >
+          
             <Typography variant="h6" align="left">
-              <b>{"Q" + question.number + "."}</b>
+            {question.isRequired ?  <span style={{color:'red'}}>*</span> : null}   <b>{"Q" + question.number + "."}</b>
             </Typography>
           </Grid>
           <Grid item container xs={11}  direction="column">
@@ -39,9 +39,9 @@ const QuestionTitle = ({ question }) => {
               </Typography>
             </Grid>
             <Grid item xs>
-              {question.title.explanation ? (
+              {question.title.description ? (
                 <Typography variant="subtitle1" align="left" >
-                  {"(" + question.title.explanation + ")"}
+                  {"(" + question.title.description + ")"}
                 </Typography>
               ) : null}
             </Grid>

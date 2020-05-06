@@ -13,12 +13,20 @@
     "@material-ui/lab": "^4.0.0-alpha.51",
     "@zeit/next-sass": "^1.0.1",
     "clsx": "^1.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-modules": "^1.1.1",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.19.0",
     "lodash": "^4.17.15",
+    "moment": "^2.25.3",
     "next": "9.3.5",
     "next-images": "^1.4.0",
+    "prettier-eslint-cli": "^5.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-swipeable-views": "^0.13.9",
+    "use-deep-compare-effect": "^1.3.1",
     "uuid": "^8.0.0"
   }
 }

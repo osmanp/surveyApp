@@ -19,23 +19,39 @@ const getIcon = (type) => {
   }
 };
 
-const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
+const SelectMultiAnswerOptions = ({ type, initialOptions, optionsChanged }) => {
+
   const initialState = {
-    rows: [],
-    columns: [],
+    rows: initialOptions.rows || [],
+    columns: initialOptions.columns || [],
+    variant:type ? type.replace('liken-','')  : 'radio'
   };
   const [options, setOptions] = React.useState(initialState);
+  const [rows, setRows] = React.useState(initialState.rows);
+  const [columns, setColumns] = React.useState(initialState.columns);
   const [rowLabel, setRowLabel] = React.useState("");
   const [columnLabel, setColumnLabel] = React.useState("");
+
+  React.useEffect(() => {
+    setRows(initialState.rows);
+    setColumns(initialState.columns);
+  }, [initialOptions]);
+  
+  React.useEffect(() => {
+    optionsChanged(options);
+  },[options]);
+  
   const handleDeleteRow = (index) => {
     let newOptions = _.cloneDeep(options);
     newOptions.rows.splice(index, 1);
     setOptions(newOptions);
+    setRows(newOptions.rows);
   };
-  const handleDeleteColumn = (index) => {
+  const handleDeleteColumn = (index) => {    
     let newOptions = _.cloneDeep(options);
     newOptions.columns.splice(index, 1);
     setOptions(newOptions);
+    setColumns(newOptions.columns);
   };
   const handleAddNewColumn = (index) => {
     let newOptions = _.cloneDeep(options);
@@ -45,6 +61,7 @@ const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
     });
     setOptions(newOptions);
     optionsChanged(newOptions);
+    setColumnLabel('');
   };
   const handleAddNewRow = (index) => {
     let newOptions = _.cloneDeep(options);
@@ -54,6 +71,7 @@ const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
     });
     setOptions(newOptions);
     optionsChanged(newOptions);
+    setRowLabel('');
   };
   return (
     <Grid
@@ -88,6 +106,7 @@ const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
                   }}
                   variant="standard"
                   onChange={(event) => setRowLabel(event.target.value)}
+                  value={rowLabel}
                 />
               </Grid>
               <Grid item xs={2}>
@@ -105,7 +124,7 @@ const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
         <Grid item xs={12}>
           <Box>
             <List>
-              {options.rows.map((element, index) => {
+              {rows.map((element, index) => {
                 return (
                   <ListItem key={index}>
                     {index + 1}
@@ -157,13 +176,14 @@ const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
                   }}
                   variant="standard"
                   onChange={(event) => setColumnLabel(event.target.value)}
+                  value={columnLabel}
                 />
               </Grid>
               <Grid item xs={2}>
                 <TextField
                   id="column-value"
                   label="Column value"
-                  type="number"                  
+                  type="number"
                   defaultValue={1}
                   fullWidth
                   margin="normal"
@@ -188,7 +208,7 @@ const SelectMultiAnswerOptions = ({ type, optionsChanged }) => {
         <Grid item xs={12}>
           <Box>
             <List dense>
-              {options.columns.map((element, index) => {
+              {columns.map((element, index) => {
                 return (
                   <ListItem key={index}>
                     {index + 1}

@@ -1,27 +1,10 @@
-import {
-  FormControl,
-  Button,
-  Grid,
-  TextField,
-  Box,
-  Paper,
-  FormControlLabel,
-  List,
-  ListItem,
-  ListItemIcon,
-  IconButton,
-  ListItemText,
-  Checkbox,
-  ListItemSecondaryAction,
-  Divider,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, FormControl, Grid, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, TextField, Typography } from "@material-ui/core";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import DeleteIcon from "@material-ui/icons/Delete";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import React from "react";
 import _ from "lodash";
+import React from "react";
 
 const getIcon = (type) => {
   switch (type) {
@@ -36,61 +19,77 @@ const getIcon = (type) => {
   }
 };
 
-const SelectAnswerOptions = ({ type, optionsChanged }) => {
+const SelectAnswerOptions = ({ type, initialOptions, optionsChanged }) => {
+
   const initialState = {
-    options: [],
+    rows: initialOptions.rows || [],    
+    variant: type ? type.replace('single-select-','') : 'radio'
   };
+
+  console.log(initialOptions);
   const [options, setOptions] = React.useState(initialState);
+  const [rows, setRows] = React.useState(initialState.rows);
   const [label, setLabel] = React.useState("");
   const [answerText, setAnswerText] = React.useState("");
   const [answerValue, setAnswerValue] = React.useState(1);
   const [value, setValue] = React.useState(1);
+
+  React.useEffect(() => {
+    setRows(initialState.rows);
+  }, [initialOptions, type]);
+  
+  React.useEffect(() => {
+    optionsChanged(options);
+  },[options]);
+  
   const onChange = (event) => {
     switch (event.target.id) {
       case "answer":
         setLabel(event.target.value);
-        setAnswerText(event.target.value)
+        setAnswerText(event.target.value);
         break;
       case "answer-value":
         setValue(event.target.value);
-        setAnswerValue(event.target.value)
+        setAnswerValue(event.target.value);
         break;
     }
   };
-  const onHandleClickOption = (index) => {
+  const handleDeleteOption = (index) => {
     let newOptions = _.cloneDeep(options);
-    newOptions.options.splice(index, 1);
+    newOptions.rows.splice(index, 1);
     setOptions(newOptions);
     optionsChanged(newOptions);
-    setAnswerValue(newOptions.options.length);
+    setAnswerValue(newOptions.rows.length);
   };
-  const handleAddOther = (event) => {
+
+  const handleAddOther = () => {
     if (label.length < 1) return;
     let newOptions = _.cloneDeep(options);
-    newOptions.options.push({
+    newOptions.rows.push({
       label: "",
       value: value,
-      type:'other'
+      type: 'other'
     });
     setOptions(newOptions);
     optionsChanged(newOptions);
-    setAnswerText("");    
-  }
-  const handleAddNewOption = (event) => {
+    setAnswerText("");
+  };
+
+  const handleAddNewOption = () => {
     if (label.length < 1) return;
     let newOptions = _.cloneDeep(options);
-    newOptions.options.push({
+    newOptions.rows.push({
       label: label,
       value: value,
     });
     setOptions(newOptions);
     optionsChanged(newOptions);
-    setAnswerText("");    
+    setAnswerText("");
   };
   return (
     <Grid container direction="column" spacing={1}>
       <Grid item xs={12}>
-        <FormControl style={{minWidth:'100%'}}>
+        <FormControl style={{ minWidth: '100%' }}>
           <Grid
             container
             direction="row"
@@ -98,7 +97,7 @@ const SelectAnswerOptions = ({ type, optionsChanged }) => {
             alignContent="flex-start"
             justify="center"
             alignItems="center"
-            
+
           >
             <Grid item xs={7}>
               <TextField
@@ -149,7 +148,7 @@ const SelectAnswerOptions = ({ type, optionsChanged }) => {
                 onClick={handleAddOther}
               >
                 Add Other
-              </Button> : null }
+              </Button> : null}
             </Grid>
           </Grid>
         </FormControl>
@@ -158,8 +157,8 @@ const SelectAnswerOptions = ({ type, optionsChanged }) => {
       <Grid item xs={12}>
         <Box>
           <Typography variant="h6"><u>{"Options"}</u></Typography>
-          <List dense>            
-            {options.options.map((element, index) => {
+          <List dense>
+            {rows.map((element, index) => {
               return (
                 <ListItem key={index}>
                   {" "}
@@ -169,7 +168,7 @@ const SelectAnswerOptions = ({ type, optionsChanged }) => {
                     <IconButton
                       color="secondary"
                       component="span"
-                      onClick={() => onHandleClickOption(index)}
+                      onClick={() => handleDeleteOption(index)}
                     >
                       <DeleteIcon></DeleteIcon>
                     </IconButton>

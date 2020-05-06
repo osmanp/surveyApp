@@ -1,24 +1,51 @@
 {
-    "env": {
-      "browser": true,
-      "jest": true,
-      "es6": true,
-      "node": true
-    },
-    "plugins": ["import"],
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
-    "parserOptions": {
-      "ecmaVersion": 2018,
-      "sourceType": "module"
-    },
-    "rules": {
-      "no-console": "warn",
-      "no-eval": "error",
-      "import/first": "error",
-      "react/react-in-jsx-scope": "off"
-    },
-    "globals": {
-      "React": "writable"
-    }
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "plugins": [
+    "react",
+    "modules",
+    "import",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"  ,
+    "prettier"  
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {    
+    "no-console": "warn",
+    "prettier/semi":"true",
+    "semi":[1,"always"],
+    "no-eval": "error",
+    "no-undef":"warn",
+    "no-unused-vars":"warn",
+    "no-fallthrough":"warn",
+    "prettier/prettier": "off",
+    "react/prop-types":"off",
+    "react/react-in-jsx-scope": "warn",
+    "react/no-array-index-key":"warn",    
+    "react/jsx-first-prop-new-line": [
+      1,
+      "multiline"
+    ],
+    "react/jsx-max-props-per-line": [
+      1,
+      {
+        "maximum": 6,
+        "when": "always"
+      }
+    ]
+  },
+  "globals": {
+    "React": "writable"
   }
-  
+}

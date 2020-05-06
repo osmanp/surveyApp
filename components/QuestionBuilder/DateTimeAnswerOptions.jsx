@@ -2,29 +2,43 @@ import { FormControl, Grid, TextField } from "@material-ui/core";
 import React from "react";
 import _ from 'lodash';
 
-const DateTimeAnswerOptions = ({type, optionsChanged}) => {
+const DateTimeAnswerOptions = ({type, initialOptions, optionsChanged}) => {
   const initialState = {          
-      label: type ==  'date' ? 'Select Date' : 'Select Time',
-      defaultValue:null
-  }
+      label: initialOptions.label ||  (type ==  'date' ? 'Select Date' : 'Select Time'),
+      defaultValue:initialOptions.defaultValue || null,
+      variant:type
+  };
 
   const [options,setOptions] = React.useState(initialState);
+  const [label,setLabel]  = React.useState(initialState.label);
+  const [defaultValue,setDefaultValue]  = React.useState(initialState.label);
 
+  React.useEffect(() => {
+    setLabel(initialState.label);
+    setDefaultValue(initialState.defaultValue);
+  },[initialOptions]);
+  
+  React.useEffect(() => {
+    optionsChanged(options);
+  },[options]);
+  
   const handleChange = (event) => {
     let newOptions = _.cloneDeep(options);
     switch (event.target.id) {
       case "label":
         newOptions.label = event.target.value;
+        setLabel(newOptions.label);
         break;
       case "default-value":
         newOptions.defaultValue = event.target.value;
+        setDefaultValue(newOptions.defaultValue);
         break;
       default:
         break;
     }
     setOptions(newOptions);
     optionsChanged(newOptions);
-  }
+  };
  
   return (
     <FormControl>
@@ -38,6 +52,7 @@ const DateTimeAnswerOptions = ({type, optionsChanged}) => {
             type='text'
             placeholder={options.label}                  
             fullWidth
+            value={label}
             margin="normal"
             InputLabelProps={{
               shrink: true,
@@ -58,6 +73,7 @@ const DateTimeAnswerOptions = ({type, optionsChanged}) => {
               shrink: true,
             }}
             onChange={handleChange}
+            value={defaultValue}
             variant="standard"
           />
         </Grid>        

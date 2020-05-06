@@ -1,20 +1,17 @@
 import { Container, Grid } from "@material-ui/core";
 import _ from "lodash";
 import React from "react";
-import QuestionContainer from "../Question/QuestionContainer";
-import QuestionForm from "./QuestionForm";
-import SurveyBuilderSpeedDial from "./SurveyBuilderSpeedDial";
+import QuestionBuildForm from "../QuestionBuilder/QuestionBuildForm";
 import SurveyTitleForm from "./SurveyTitleForm";
 const uuid = require("uuid");
-import Router from "next/router";
 
 const SurveyBuilder = () => {
   const initialQuestion = {
-    id: 1,
+    id: uuid.v4(),
     type: "free-text",
     number: "1",
     title: {
-      text: "Untitle Question",
+      text: "Untitled Question",
     },
     body: {
       rows: 5,
@@ -28,11 +25,13 @@ const SurveyBuilder = () => {
       questionCount: 1,
     },
     body: {
-      questions: [],
+      questions: [initialQuestion],
       questionPerPage: 3,
       enableProgress: true,
     },
   };
+
+  const [questionBlocks,setQuestionBlocks] = React.useState([]);
   const [survey, setSurvey] = React.useState(initialSurvey);
   const [questionTemplate, setQuestionTemplate] = React.useState(
     initialQuestion
@@ -41,32 +40,33 @@ const SurveyBuilder = () => {
   const handleTitleUpdate = (surveyTitle) => {
     const newSurvey = _.cloneDeep(survey);
     newSurvey.title.text = surveyTitle;
-    setSurvey(newQuestion);
+    setSurvey(newSurvey);
   };
   const handleQuestionUpdate = (question) => {
     const newQuestion = _.cloneDeep(question);
     setQuestionTemplate(newQuestion);
   };
-  const handleActions = (event) => {
+  const handleActions = (event, senderID) => {    
     switch (event) {
-      case "AddQuestion":
+      case "Add":
         {
-          const newQuestions = Array.from(survey.body.questions);
+          const newBlocks = Array.from(questionBlocks);
           const newQuestion = _.cloneDeep(questionTemplate);
           newQuestion.id = uuid.v4();
-          if(hovering <= 0 ){
-            newQuestion.number = survey.body.questions.length + 1;
-            newQuestions.push(newQuestion);
+          newQuestion.number = newBlocks.findIndex(s => s.question.id == senderID) + 1;          
+
+          newBlocks.push({state:'view', question:newQuestion});
+          for(var i = 0 ; i <  newBlocks.length ; i++){
+            const currentNumber = newBlocks[i].question.number;
+            if(currentNumber <= newQuestion.number){
+              newBlocks[i].question.number++;
+            }
           }
-          else {
-            newQuestion.number = hovering + 1;
-            newQuestions.splice(hovering,0,newQuestion);
-          }
-          
+
+          setQuestionBlocks(newBlocks);
           const newSurvey = _.cloneDeep(survey);
-          newSurvey.body.questions = Array.from(newQuestions);
+          newSurvey.body.questions = Array.from(newBlocks.map(x => x.question));
           setSurvey(newSurvey);
-          
         }
         break;
       case "Copy":
@@ -79,7 +79,7 @@ const SurveyBuilder = () => {
 
           const newSurvey = _.cloneDeep(survey);
           newSurvey.body.questions = Array.from(newQuestions);
-          setSurvey(newSurvey);          
+          setSurvey(newSurvey);
         }
         break;
       case "Delete": {
@@ -98,8 +98,6 @@ const SurveyBuilder = () => {
         //   query: { id: survey.id },
         // });
       }
-      default:
-        break;
     }
   };
   const handlers = {
@@ -108,7 +106,6 @@ const SurveyBuilder = () => {
     handleActions: handleActions,
   };
 
-  const [hovering, setHovering] = React.useState(0);
   return (
     <Container maxWidth="md" style={{ marginBottom: "1200px" }}>
       <Grid
@@ -126,46 +123,18 @@ const SurveyBuilder = () => {
           <Container maxWidth="md">
             {survey.body.questions.map((element, index) => {
               return (
-                <div
-                  style={{ cursor: "pointer" }}
-                  onMouseEnter={() => setHovering(index + 1)}
-                  onMouseLeave={() => setHovering(-1)}
-                >
-                  <Grid item xs>
-                    <QuestionContainer question={element}></QuestionContainer>
-                  </Grid>
-                  {hovering === (index + 1) ? (
-                    <Grid item xs>
-                      <SurveyBuilderSpeedDial
-                        eventHandler={handleActions}
-                      ></SurveyBuilderSpeedDial>
-                    </Grid>
-                  ) : null}
-                </div>
+                <QuestionBuildForm key={index} state={'view'} question={element} templateType={'short-answer'} handlers={handlers} >
+
+                </QuestionBuildForm>
               );
             })}
           </Container>
 
           <Grid item xs>
-            <div
-              style={{ cursor: "pointer" }}
-              onMouseEnter={() => setHovering(0)}
-              onMouseLeave={() => setHovering(-1)}
-            >
-              <QuestionForm
-                handlers={handlers}
-                questionTemplate={questionTemplate}
-              ></QuestionForm>
-               {hovering == 0 ? (
-            
-              <SurveyBuilderSpeedDial
-                eventHandler={handleActions}
-              ></SurveyBuilderSpeedDial>
-            
-          ) : null}
-            </div>
+            <QuestionBuildForm state={'edit'} question={questionTemplate} templateType={'short-answer'} handlers={handlers} >
+            </QuestionBuildForm>
           </Grid>
-         
+
         </Grid>
       </Grid>
     </Container>
