@@ -45,9 +45,8 @@ const SurveyBuilder = () => {
     newSurvey.title.text = surveyTitle;
     setSurvey(newSurvey);
   };
-  const handleQuestionUpdate = (question) => {
-    const newQuestion = _.cloneDeep(question);
-    setQuestionTemplate(newQuestion);
+  const handleQuestionUpdates = (questions) => {
+   
   };
   const handleActions = (event, senderID) => {
     switch (event) {
@@ -104,7 +103,7 @@ const SurveyBuilder = () => {
     }
   };
   const handlers = {
-    updateQuestions: handleQuestionUpdate,
+    updateQuestions: handleQuestionUpdates,
     updateTitle: handleTitleUpdate,
     handleActions: handleActions,
   };
@@ -113,7 +112,7 @@ const SurveyBuilder = () => {
     <div>
 
       
-      <Container maxWidth="lg" >
+      <Container maxWidth="lg" style={{marginBottom:'200px'}}>
         <Grid
           container
           direction="column"
@@ -125,10 +124,10 @@ const SurveyBuilder = () => {
             <SurveyTitleForm handlers={handlers}></SurveyTitleForm>
           </Grid>
           <Grid item xs={12} container direction="column">
-            <QuestionBuildBlocks></QuestionBuildBlocks>
+            <QuestionBuildBlocks handler={handlers}></QuestionBuildBlocks>
           </Grid>
           <Grid item xs={12}>
-            <SurveyBuilderSpeedDial eventHandler={handlers}></SurveyBuilderSpeedDial>
+            <SurveyBuilderSpeedDial eventHandler={handlers.handleActions}></SurveyBuilderSpeedDial>
           </Grid>
         </Grid>
       </Container>

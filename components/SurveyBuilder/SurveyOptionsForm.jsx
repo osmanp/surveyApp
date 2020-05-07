@@ -12,7 +12,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import React from 'react';
 import { TwitterPicker } from 'react-color';
-const drawerWidth = '400px';
+const drawerWidth = '340px';
 const actions = [
     {
         icon: <AddCircleOutlineIcon />,
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 
 const GetSurveyOptions = () => {
     const classes = useStyles();
-    return (<ExpansionPanel>
+    return (<ExpansionPanel expanded={true}>
         <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -58,7 +58,7 @@ const GetSurveyOptions = () => {
             </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <Grid container direction='row'>
+            <Grid container direction='row' spacing={2}>
                 {/* Theme */}
                 <Grid item container direction='column' xs={12} spacing={2}>
                     <Grid item >
@@ -71,7 +71,7 @@ const GetSurveyOptions = () => {
                             <Select
                                 id="select"
                                 value={'Default'}
-                                style={{ minWidth: '100%' }}
+                                style={{ minWidth: '280px' }}
                                 fullWidth
                                 label='Theme'
                                 variant='outlined'
@@ -95,16 +95,48 @@ const GetSurveyOptions = () => {
                         <TwitterPicker triangle='hide' />
                     </Grid>
                 </Grid>
+                <Grid item xs>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                id="show-question-pbar"
+                                name="show-question-pbar"
+                                color="secondary"
+                            />
+                        }
+                        labelPlacement="end"
+                        label="Auto pagination"
+                    />
+                      <TextField
+                        id="estimated-time"
+                        type="number"
+                        variant="standard"
+                        style={{ maxWidth: "40%" }}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    
+                                </InputAdornment>
+                            ),
+                            endAdornment: (
+                                <InputAdornment position="end"> per page</InputAdornment>
+                            ),
+                        }}
+                    />
+                </Grid>
             </Grid>
         </ExpansionPanelDetails>
     </ExpansionPanel>);
 };
 const GetTitleOptions = () => {
-    return (<ExpansionPanel>
+    return (<ExpansionPanel expanded={true}>
         <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
-            id="panel1a-header"
+            id="panel1a-header"            
         >
             <Typography variant='h6' align='center'>
                 <u>Title Options</u>
@@ -123,7 +155,7 @@ const GetTitleOptions = () => {
                             />
                         }
                         labelPlacement="end"
-                        label="Show estimated time"
+                        label="Estimated time"
                     />
                     <TextField
                         id="estimated-time"
@@ -155,7 +187,7 @@ const GetTitleOptions = () => {
                             />
                         }
                         labelPlacement="end"
-                        label="Show question count"
+                        label="Question count"
                     />
                 </Grid>
                 <Grid item xs>
@@ -168,41 +200,10 @@ const GetTitleOptions = () => {
                             />
                         }
                         labelPlacement="end"
-                        label="Show progress bar"
+                        label="Progress bar"
                     />
                 </Grid>
-                <Grid item xs>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                id="show-question-pbar"
-                                name="show-question-pbar"
-                                color="secondary"
-                            />
-                        }
-                        labelPlacement="end"
-                        label="Auto pagination"
-                    />
-                      <TextField
-                        id="estimated-time"
-                        type="number"
-                        variant="standard"
-                        style={{ maxWidth: "40%" }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    Per 
-                                </InputAdornment>
-                            ),
-                            endAdornment: (
-                                <InputAdornment position="end">Page</InputAdornment>
-                            ),
-                        }}
-                    />
-                </Grid>
+              
             </Grid>
         </ExpansionPanelDetails>
     </ExpansionPanel>);
@@ -219,7 +220,7 @@ const SurveyOptionsForm = () => {
                 classes={{
                     paper: classes.drawerPaper,
                 }}
-                anchor="right" open={open} onClose={() => setOpen(false)} >
+                anchor="left" open={open} onClose={() => setOpen(false)} >
                 {GetSurveyOptions()}
                 {GetTitleOptions()}
                 {/* <Grid container direction='row' spacing={4} style={{ width: '100%', marginTop: '20px', paddingLeft: '20px' }}>

@@ -9,7 +9,7 @@ function Copyright() {
     <Typography
 color="inherit" variant="subtitle2" align="center"
       style={{
-        fontFamily: "\"Consolas\", \"Helvetica\", \"Arial\", sans-serif",
+        fontFamily: "\"Arial\", \"Helvetica\", \"Arial\", sans-serif",
       }}>
       {"Copyright © "}
       OsmanP. {new Date().getFullYear()}
@@ -20,7 +20,7 @@ color="inherit" variant="subtitle2" align="center"
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#404752",
+    background: "#56A128",
     top: 'auto',
     bottom: 0,
     height: '50px'

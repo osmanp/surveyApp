@@ -53,7 +53,7 @@ const QuestionTypeDropDown = ({ templateType, handleChangeType }) => {
     return <Select id='select-type' value={value} fullWidth onChange={onChange}>
         {MenuCategory('Text')}
         {MenuItemTypo('Line Answer', 'short-answer', <ShortTextIcon></ShortTextIcon>)}
-        {MenuItemTypo('Paragraph Answer', 'long-answer', <ViewHeadlineIcon></ViewHeadlineIcon>)}
+        {MenuItemTypo('Paragraph', 'long-answer', <ViewHeadlineIcon></ViewHeadlineIcon>)}
         {MenuCategory('Scale')}
         {MenuItemTypo('Radio', 'radio-slider', <RadioButtonCheckedIcon></RadioButtonCheckedIcon>)}
         {MenuItemTypo('Rating', 'rating-slider', <StarHalfIcon />)}

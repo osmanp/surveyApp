@@ -1,23 +1,34 @@
-import { Container, Grid, IconButton, makeStyles, Paper } from "@material-ui/core";
+import { Container, Grid, IconButton, makeStyles, Paper,Tooltip } from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import SaveIcon from "@material-ui/icons/Save";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import { withStyles } from '@material-ui/core/styles';
+
+
+const MyToolTip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#86A096',
+    // color: 'rgba(0, 0, 0, 0.87)',  
+    fontSize: 18,
+  },
+}))(Tooltip);
 
 const actions = [
   {
     icon: <AddCircleOutlineIcon />,
-    name: "AddQuestion",
-    tooltipTitle: "Add Question",
+    name: "AddPage",
+    toolTip: "New Page",
   },
 
-  { icon: <AddBoxIcon />, name: "AddPage", tooltipTitle: "New Page" },
-  { icon: <SaveIcon />, name: "Save", tooltipTitle: "Save Survey" },
-  { icon: <VisibilityIcon />, name: "Preview", tooltipTitle: "Preview" },
+  { icon: <AddBoxIcon />, name: "AddSection", toolTip: "New Section" },
+  { icon: <SaveIcon />, name: "Save", toolTip: "Save Survey" },
+  { icon: <VisibilityIcon />, name: "Preview", toolTip: "Preview" },
 ];
 const useStyles = makeStyles({
   tooltip: {
     fontSize: 24,
+    backgroundColor: 'black'
   }
 });
 const SurveyBuilderSpeedDial = ({ eventHandler }) => {
@@ -25,19 +36,21 @@ const SurveyBuilderSpeedDial = ({ eventHandler }) => {
   const classes = useStyles();
   return (
     <Container maxWidth="xs" style={{ marginTop: "20px" }}>
-      <Paper variant='elevation' elevation={2} style={{ borderRadius: '20px' }}>
+      <Paper variant='elevation' elevation={2} style={{ borderRadius: '20px',backgroundColor:'#86A096' }}>
         <Grid container direction='row'>
           {actions.map((action) => {
             return (
               <Grid key={action.name} item xs>
-                <IconButton
-                  key={action.name}
-
-                  tooltipTitle={action.name}
-                  onClick={() => eventHandler(action.name)}
-                  TooltipClasses={classes}
-                >{action.icon}
-                </IconButton>
+                <MyToolTip title={action.toolTip} placement='top'>
+                  <IconButton
+                    key={action.name}
+                    color='primary'
+                    tooltipTitle={action.toolTip}
+                    onClick={() => eventHandler(action.name)}
+                    TooltipClasses={classes}
+                  >{action.icon}
+                  </IconButton>
+                </MyToolTip>
               </Grid>
             );
           })}

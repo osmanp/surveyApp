@@ -157,7 +157,7 @@ const QuestionBuildBlocks = ({ questions, handler }) => {
                     <Container maxWidth="lg">
                         {blocks.map((element) => {
                             return (
-                                <QuestionBuildForm key={element.id} state={element.state} autoChange={true} question={element.question} handlers={handlers} >
+                                <QuestionBuildForm key={element.id} state={element.state} autoChange={false} question={element.question} handlers={handlers} >
                                 </QuestionBuildForm>
                             );
                         })}

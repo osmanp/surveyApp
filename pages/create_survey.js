@@ -1,8 +1,8 @@
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
+import QuestionBuildBlocks from "../components/QuestionBuilder/QuestionBuildBlocks";
+import SurveyOptionsForm from "../components/SurveyBuilder/SurveyOptionsForm";
+import SurveyBuilder from "../components/SurveyBuilder/SurveyBuilder";
 import Layout from '../components/Layout';
-import SurveyTemplatesFilter from "../components/SurveyTemplates/SurveyTemplatesFilter";
-import TemplateCard from "../components/SurveyTemplates/TemplateCard";
-import Surveys from '../data/survey';
 export default function Home() {
   // const survey = Surveys[0];
   // survey.body.questions=Questions;
@@ -75,18 +75,31 @@ export default function Home() {
   //       ]
   //     } 
   //   };
-
+    
   //   setQuestion(q);  
   //   //setType('single-select-radio');
   //   setState( 9);    
   // };
   return (
     <Layout>
-      <Container style={{ minHeight: '1200px' }}>
-        <SurveyTemplatesFilter></SurveyTemplatesFilter>
-        <TemplateCard survey={Surveys[0]}></TemplateCard>
-      </Container>
-    </Layout>
+ <Container style={{minHeight:'1200px'}}>
+        {/* <QuestionContainer question={Questions[0]}></QuestionContainer>
+        <QuestionContainer question={Questions[1]}></QuestionContainer>
+        <QuestionContainer question={Questions[2]}></QuestionContainer>
+        <QuestionContainer question={Questions[3]}></QuestionContainer>
+        <QuestionContainer question={Questions[4]}></QuestionContainer>
+        <QuestionContainer question={Questions[5]}></QuestionContainer> */}
+{/* 
+        <QuestionContainer question={Questions[6]}></QuestionContainer> */}
 
+       {/* <SurveyContainer survey={survey}></SurveyContainer>     */}
+       
+       {/* <QuestionBuildBlocks questions={[]}  handler={{updateQuestions: (questions) => {console.log(questions);}}} ></QuestionBuildBlocks> */}
+        <SurveyBuilder></SurveyBuilder>
+   
+   
+      </Container>        
+    </Layout>
+     
   );
 }

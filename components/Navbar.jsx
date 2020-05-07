@@ -8,7 +8,7 @@ import Link from "./Link";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#404752",
+    background: "#56A128",
     overflowY: "hidden",
   },
   avatarSmall: {
@@ -16,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   toolbarTitle: {
-    fontFamily: 'Consolas',
+    fontFamily: 'Arial',
     fontSize: '18px',
     fontWeight: 400,
     "&:hover": {
-      backgroundColor:'teal'
+      backgroundColor:'#09950A'
     },
   },
   avatarLarge: {
     width: theme.spacing(7),
     height: theme.spacing(7),
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: "#41594F",
     borderRadius: "50%",
     border: 0,
     "&:hover": {
@@ -47,7 +47,7 @@ const NavBarItem = ({ text, href }) => {
       align="center"
       noWrap
       className={classes.toolbarTitle}
-      style={{ fontSize: '1.1rem' }}      
+      style={{ fontSize: '1.3rem',color:'white' ,border:'0.1rem solid #09950A',padding:'10px',paddingRight:'20px',paddingLeft:'20px',borderRadius: '40px'}}      
     >
 
       <Link
@@ -62,29 +62,25 @@ const NavBarItem = ({ text, href }) => {
   );
 };
 
-const Navbar = (props) => {
+const Navbar = () => {
   const classes = useStyles();
   const router = useRouter();
   const handleAvatarClick = () => {
     router.push("/index");
   };
-  const handleThemeChange = () => {
-    console.log(props);
-    props.onThemeChange();
-  };
+
   return (
     <React.Fragment>
       <AppBar position="fixed" className={classes.appBar}>
         <CssBaseline />
         <Toolbar className={classes.toolbar}>
 
-          <Grid container alignContent="center" justify='flex-start' alignItems="center">
+          <Grid container alignContent="center" justify='flex-start' alignItems="center" spacing={1}>
             <Grid item xs={2}>
-              <Grid container alignContent="center">
+              <Grid container alignContent="center" >
                 <Grid item xs={2}>
                   <Avatar
                     alt="Osman P"
-
                     className={classes.avatarLarge}
                     onClick={handleAvatarClick}
                   >F S</Avatar>
@@ -101,21 +97,27 @@ const Navbar = (props) => {
               </Grid>
             </Grid>
 
-            <Grid item xs={3}>
-              <Grid container alignContent="stretch" justify="space-between">
+            <Grid item xs={6}>
+              <Grid container alignContent="stretch" justify="space-between" >
                 <Grid item>
-                  <NavBarItem text={"Create Survey"} href={"about"}></NavBarItem>
+                  <NavBarItem text={"Survey Builder"} href={"create_survey"}></NavBarItem>
                 </Grid>
                 <Grid item>
                   <NavBarItem
-                    text={"Search Survey"}
-                    href={"articles"}
+                    text={"Search Survey Templates"}
+                    href={"search_templates"}
                   ></NavBarItem>
                 </Grid>
                 <Grid item>
                   <NavBarItem
                     text={"My Surveys"}
-                    href={"contact"}
+                    href={"view_surveys"}
+                  ></NavBarItem>
+                </Grid>
+                <Grid item>
+                  <NavBarItem
+                    text={"Public Surveys"}
+                    href={"public_surveys"}
                   ></NavBarItem>
                 </Grid>
               </Grid>
