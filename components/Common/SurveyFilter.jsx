@@ -163,13 +163,33 @@ const SurveyTemplatesFilter = ({options,handlers}) => {
         setRatings([]);
     };
     const handleSearch = (searchValue) => {
+        const filter = {
+            searchText:searchValue,
+            categories:categories,
+            ratings:ratings
+        };
         
+        handlers.filter(filter);
     };
-    const handleSelectCategory = (categories) => {
+    const handleSelectCategory = (categories) => {        
         setCategories(categories);
+        const filter = {
+            searchText:searchValue,
+            categories:categories,
+            ratings:ratings
+        };
+        
+        handlers.filter(filter);
+        
     };
     const handleSelectRatings = (ratings) => {
         setRatings(ratings);
+        const filter = {
+            searchText:searchValue,
+            categories:categories,
+            ratings:ratings
+        };        
+        handlers.filter(filter);
     };
     return (
         <Drawer

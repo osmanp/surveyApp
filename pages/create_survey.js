@@ -3,7 +3,10 @@ import QuestionBuildBlocks from "../components/QuestionBuilder/QuestionBuildBloc
 import SurveyOptionsForm from "../components/SurveyBuilder/SurveyOptionsForm";
 import SurveyBuilder from "../components/SurveyBuilder/SurveyBuilder";
 import Layout from '../components/Layout';
-export default function Home() {
+import { withRedux } from '../lib/redux';
+
+
+const  CreateSurveyPage = () => {
   // const survey = Surveys[0];
   // survey.body.questions=Questions;
 
@@ -102,4 +105,7 @@ export default function Home() {
     </Layout>
      
   );
-}
+};
+
+
+export default withRedux(CreateSurveyPage);

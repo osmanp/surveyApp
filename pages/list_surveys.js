@@ -7,12 +7,19 @@ import Surveys from '../data/survey';
 
 export default function ListSurveys() {
     const surveyTemplates = [Surveys[0], Surveys[0], Surveys[0], Surveys[0]];
+
+    //Note: filter to mongo db
+    const handler = {
+        filter: (filterOptions) => {            
+            console.log(filterOptions);
+        }
+    };
     return (
         <Layout >
             <Box style={{ marginTop: '60px' }}>
                 <Grid container direction='row'>
                     <Grid item xs={2}>
-                        <SurveyFilter options={{ showRatings: false }}></SurveyFilter>
+                        <SurveyFilter options={{ showRatings: false }} handlers={handler}></SurveyFilter>
                     </Grid>
                     <Grid item container xs={10} direction='column' justify='flex-start' alignItems='stretch'>
                         <Grid item xs>

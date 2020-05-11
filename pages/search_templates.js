@@ -7,12 +7,17 @@ import Surveys from '../data/survey';
 
 export default function SearchTemplates() {
     const surveyTemplates = [Surveys[0], Surveys[0], Surveys[0], Surveys[0]];
+    const handler = {
+        filter: (filterOptions) => {            
+            console.log(filterOptions);
+        }
+    };
     return (
         <Layout>
             <Box style={{ marginTop: '60px' }}>
                 <Grid container direction='row'>
                     <Grid item xs={2}>
-                        <SurveyFilter options={{ showRatings: true }}></SurveyFilter>
+                        <SurveyFilter options={{ showRatings: true }} handlers={handler}></SurveyFilter>
                     </Grid>
                     <Grid item container xs={10} direction='column' justify='flex-start' alignItems='stretch'>
                         <Grid item container direction='row' spacing={4}>
@@ -32,9 +37,6 @@ export default function SearchTemplates() {
                         </Grid>
                     </Grid>
                 </Grid>
-
-
-
             </Box>
         </Layout>
 

@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   const lTheme = createMuiTheme(lightTheme);
   const dTheme = createMuiTheme(darkTheme);
-  const [theme,changeTheme] = useState(lTheme)
+  const [theme,changeTheme] = useState(lTheme);
   
   const onThemeChange = () => {
     var themeType = localStorage.getItem('theme');
@@ -29,7 +29,7 @@ const MyApp = ({ Component, pageProps }) => {
       changeTheme(lTheme);
       localStorage.setItem('theme','light');
     }    
-  }
+  };
   const newProps =  {onThemeChange, ...pageProps};
   return (
     <React.Fragment>
