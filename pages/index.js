@@ -1,6 +1,6 @@
 import { Container, Typography } from "@material-ui/core";
 import Layout from '../components/Layout';
-import SurveyTemplatesFilter from "../components/SurveyTemplates/SurveyTemplatesFilter";
+import SurveyFilter from "../components/Common/SurveyFilter";
 import TemplateCard from "../components/SurveyTemplates/TemplateCard";
 import Surveys from '../data/survey';
 export default function Home() {
@@ -83,7 +83,7 @@ export default function Home() {
   return (
     <Layout>
       <Container style={{ minHeight: '1200px' }}>
-        <SurveyTemplatesFilter></SurveyTemplatesFilter>
+        <SurveyFilter options={{showRatings:true}}></SurveyFilter>
         <TemplateCard survey={Surveys[0]}></TemplateCard>
       </Container>
     </Layout>

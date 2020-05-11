@@ -4,7 +4,10 @@ const survey = [
       comments:200,
       rating:4.3,
       category:"Academic",
-      createDate:"2019-21-20"
+      createDate:"2019-21-20",
+      questionCount:20,
+      respondentsCount:20,
+      isPublic:true
     },
     title: {
       text: "A survey example",

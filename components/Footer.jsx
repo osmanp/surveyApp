@@ -7,7 +7,7 @@ import React from "react";
 function Copyright() {
   return (
     <Typography
-color="inherit" variant="subtitle2" align="center"
+      color="inherit" variant="subtitle2" align="center"
       style={{
         fontFamily: "\"Arial\", \"Helvetica\", \"Arial\", sans-serif",
       }}>
@@ -20,27 +20,22 @@ color="inherit" variant="subtitle2" align="center"
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#56A128",
+    background: "#C2EBDD",
     top: 'auto',
     bottom: 0,
-    height: '50px'
+    height: '30px'
   },
   footer: {
-
+    marginBottom:'30px'
   },
 }));
 
-const socialIconProps = {
-  iconSize: 4,
-  roundness: "50%",
-  backgroundColor: "rgba(56,63,73,1)"
-};
 
 export default function Footer(props) {
   const classes = useStyles();
   return (
     <div>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar} color='inherit'>
         <CssBaseline></CssBaseline>
         <Toolbar className={classes.toolbar}>
           <Container maxWidth="md" className={classes.footer}>

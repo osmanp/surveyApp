@@ -6,14 +6,7 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import SaveIcon from '@material-ui/icons/Save';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
 import { withStyles } from '@material-ui/core/styles';
-
-const MyToolTip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: '#86A096',
-    // color: 'rgba(0, 0, 0, 0.87)',  
-    fontSize: 18,
-  },
-}))(Tooltip);
+import MyToolTip from '../Common/MyToolTip';
 
 const actions = [
   {
@@ -47,7 +40,7 @@ const QuestionFormActions = ({ eventHandler, senderID, group }) => {
   const classes = useStyles();  
   return (
     <Container style={{ marginTop: '20px' }}>
-      <Paper variant='elevation' elevation={4} style={{ borderRadius: '20px',maxWidth:'80%',backgroundColor:'#86A096' }}>
+      <Paper variant='elevation' elevation={4} style={{ borderRadius: '20px',maxWidth:'90%',backgroundColor:'#C2EBDD' }}>
         <Grid container direction='row' justify='flex-start'>
 
           {actions.filter(a => ~a.groups.indexOf(group)).map((action) => {

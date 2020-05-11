@@ -192,7 +192,7 @@ const QuestionForm = ({ initialQuestionTemplate, handlers }) => {
           marginTop: '20px',
           maxWidth: '100%',
           borderRadius: '20px',
-          border:'0.15rem solid teal'
+          border:'0.15rem solid #41594F'
         }}>
         <Grid container direction='column' spacing={2} alignItems='stretch' alignContent='stretch' justify='center'>
           <Grid item xs>

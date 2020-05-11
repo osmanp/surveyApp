@@ -13,7 +13,8 @@ const QuestionBuildBlocks = ({ questions, handler }) => {
             text:"Untitled Question",
             description:""
         },
-        body:{           
+        body:{          
+            variant:'short' 
         }
     };
 

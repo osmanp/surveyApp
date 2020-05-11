@@ -14,7 +14,8 @@ const useStyles = makeStyles({
         width: '100%',
         flexShrink: 0,
         overflow: 'auto',
-        overflowY: 'unset'
+        overflowY: 'unset',
+        paddingTop:'60px'
     },
     drawerPaper: {
         width: drawerWidth,
@@ -143,7 +144,7 @@ const Search = ({value,handleSearch}) => {
     );
 };
 
-const SurveyTemplatesFilter = ({handlers}) => {
+const SurveyTemplatesFilter = ({options,handlers}) => {
     
     const initialFilter = {
         search:"",
@@ -192,12 +193,16 @@ const SurveyTemplatesFilter = ({handlers}) => {
                 <Grid item xs>
                     <Divider></Divider>
                 </Grid>
+                {options.showRatings ?                 
+                <>
                 <Grid item xs={12}>
-                    <SelectRating values={ratings} handleSelectCategory={handleSelectRatings}></SelectRating>
+                     <SelectRating values={ratings} handleSelectCategory={handleSelectRatings}></SelectRating>                 
                 </Grid>
                 <Grid item xs>
                     <Divider></Divider>
                 </Grid>
+                </> : null} 
+
                 <Grid item container xs={12} >
                     <Grid item xs>
                     <Button variant='outlined' color='secondary' onClick={handleClear}>
@@ -208,8 +213,7 @@ const SurveyTemplatesFilter = ({handlers}) => {
                     <Button variant='outlined' color='secondary' onClick={handleSearch}>
                        Search 
                     </Button>
-                    </Grid>
-                                    
+                    </Grid>                                    
                 </Grid>
             </Grid>
         </Drawer>

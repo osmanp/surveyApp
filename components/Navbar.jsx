@@ -8,7 +8,7 @@ import Link from "./Link";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#56A128",
+    background: "#C2EBDD",
     overflowY: "hidden",
   },
   avatarSmall: {
@@ -16,11 +16,12 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   toolbarTitle: {
-    fontFamily: 'Arial',
-    fontSize: '18px',
+    fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
+    fontSize: '16px',
+    color:'black',
     fontWeight: 400,
     "&:hover": {
-      backgroundColor:'#09950A'
+      backgroundColor:'#C2EBDD'
     },
   },
   avatarLarge: {
@@ -47,7 +48,8 @@ const NavBarItem = ({ text, href }) => {
       align="center"
       noWrap
       className={classes.toolbarTitle}
-      style={{ fontSize: '1.3rem',color:'white' ,border:'0.1rem solid #09950A',padding:'10px',paddingRight:'20px',paddingLeft:'20px',borderRadius: '40px'}}      
+      style={{ fontSize: '1.1rem',color:'black' ,border:'0.1rem solid #41594F',backgroundColor:'white',
+      padding:'10px',paddingRight:'20px',paddingLeft:'20px',borderRadius: '40px'}}      
     >
 
       <Link
@@ -56,7 +58,7 @@ const NavBarItem = ({ text, href }) => {
         href={"/" + href}
         underline="none"
       >
-        {text}
+        <b>{text}</b>
       </Link>
     </Typography>
   );
@@ -71,11 +73,12 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar} >
         <CssBaseline />
         <Toolbar className={classes.toolbar}>
 
           <Grid container alignContent="center" justify='flex-start' alignItems="center" spacing={1}>
+            <Grid item xs={1}></Grid>
             <Grid item xs={2}>
               <Grid container alignContent="center" >
                 <Grid item xs={2}>
@@ -87,12 +90,12 @@ const Navbar = () => {
                 </Grid>
                 <Grid item xs={8}>
                   <Typography
-                    component="h2"
+                    component="h5"
                     variant="h5"
                     noWrap
                     align="left"
-                    style={{ paddingLeft: "10px", paddingTop: '10px', fontFamily: 'Garamond' }}
-                  > {'Fast Survey'}</Typography>
+                    style={{ fontSize: '2rem',color:'black',padding:'8px',fontFamily:'Garamond'}}
+                  ><b>Fast Survey</b> </Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -111,13 +114,13 @@ const Navbar = () => {
                 <Grid item>
                   <NavBarItem
                     text={"My Surveys"}
-                    href={"view_surveys"}
+                    href={"list_surveys"}
                   ></NavBarItem>
                 </Grid>
                 <Grid item>
                   <NavBarItem
                     text={"Public Surveys"}
-                    href={"public_surveys"}
+                    href={"list_surveys"}
                   ></NavBarItem>
                 </Grid>
               </Grid>

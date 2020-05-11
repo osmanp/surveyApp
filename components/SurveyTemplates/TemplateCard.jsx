@@ -33,7 +33,7 @@ const TemplateCard = ({ survey }) => {
             </CardHeader>
             <CardContent>
 
-                <Table size="small" aria-label="a dense table">
+                <Table size="small" style={{width:'110%',margin:'-20px',marginRight:'-20px'}}>
                     {Object.keys(survey.attributes).map((element, index) => {
                         return (
                             <TableRow key={index}>
