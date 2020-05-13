@@ -20,7 +20,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#C2EBDD",
+    background: "#F5F5F5",
     top: 'auto',
     bottom: 0,
     height: '30px'

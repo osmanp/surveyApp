@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import SaveIcon from '@material-ui/icons/Save';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
+import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import { withStyles } from '@material-ui/core/styles';
 import MyToolTip from '../Common/MyToolTip';
 
@@ -27,9 +28,11 @@ const actions = [
     toolTip: "Add Question",
     groups: [1]
   },
+  { icon: <InsertPhotoIcon fontSize='small' />, name: "AddImage", toolTip: "Add Image", groups: [1] },
   { icon: <DeleteIcon fontSize='small' />, name: "Delete", toolTip: "Delete Question", groups: [1] },
   { icon: <FileCopyIcon fontSize='small' />, name: "Copy", toolTip: "Copy Question", groups: [1] },
   { icon: <ClearAllIcon fontSize='small' />, name: "Clear", toolTip: "Clear Question", groups: [2] },
+  
 ];
 const useStyles = makeStyles({
   tooltip: {
@@ -40,7 +43,7 @@ const QuestionFormActions = ({ eventHandler, senderID, group }) => {
   const classes = useStyles();  
   return (
     <Container style={{ marginTop: '20px' }}>
-      <Paper variant='elevation' elevation={4} style={{ borderRadius: '20px',maxWidth:'90%',backgroundColor:'#C2EBDD' }}>
+      <Paper variant='elevation' elevation={4} style={{ borderRadius: '20px',maxWidth:'90%',backgroundColor:'#C5CDD4' }}>
         <Grid container direction='row' justify='flex-start'>
 
           {actions.filter(a => ~a.groups.indexOf(group)).map((action) => {

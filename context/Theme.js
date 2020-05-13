@@ -3,7 +3,7 @@ import { lightGreen,red,grey, blue } from '@material-ui/core/colors';
 export const ThemeTypes = {
 	DARK: 'dark',
 	LIGHT: 'light'
-}
+};
 
 export const availableThemes = {
 	[ThemeTypes.DARK]: {		
@@ -45,17 +45,17 @@ export const availableThemes = {
 			}
 		}
 	}
-}
+};
 const defaultTheme = {
 	typography: {
 		"fontFamily": "'Cormorant Garamond', serif",
-		"fontSize": 14,
+		"fontSize": 12,
 		"fontWeightLight": 300,
-		"fontWeightRegular": 400,
+		"fontWeightRegular": 300,
 		"fontWeightMedium": 500					
 	   }	
   };
   
 
-export const lightTheme = { ...defaultTheme, ...availableThemes[ThemeTypes.LIGHT] }
-export const darkTheme = { ...defaultTheme, ...availableThemes[ThemeTypes.DARK] }
+export const lightTheme = { ...defaultTheme, ...availableThemes[ThemeTypes.LIGHT] };
+export const darkTheme = { ...defaultTheme, ...availableThemes[ThemeTypes.DARK] };

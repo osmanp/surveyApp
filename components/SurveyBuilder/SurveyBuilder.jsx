@@ -5,7 +5,7 @@ import QuestionBuildBlocks from '../QuestionBuilder/QuestionBuildBlocks';
 import QuestionBuildForm from "../QuestionBuilder/QuestionBuildForm";
 import SurveyTitleForm from "./SurveyTitleForm";
 import SurveyOptionsForm from './SurveyOptionsForm';
-import SurveyBuilderSpeedDial from "./SurveyBuilderSpeedDial";
+import SurveyBuilderActions from "./SurveyBuilderActions";
 const uuid = require("uuid");
 
 const SurveyBuilder = () => {
@@ -46,52 +46,22 @@ const SurveyBuilder = () => {
     setSurvey(newSurvey);
   };
   const handleQuestionUpdates = (questions) => {
-   
+
   };
   const handleActions = (event, senderID) => {
     switch (event) {
-      case "Add":
-        {
-          const newBlocks = Array.from(questionBlocks);
-          const newQuestion = _.cloneDeep(questionTemplate);
-          newQuestion.id = uuid.v4();
-          newQuestion.number = newBlocks.findIndex(s => s.question.id == senderID) + 1;
-
-          newBlocks.push({ state: 'view', question: newQuestion });
-          for (var i = 0; i < newBlocks.length; i++) {
-            const currentNumber = newBlocks[i].question.number;
-            if (currentNumber <= newQuestion.number) {
-              newBlocks[i].question.number++;
-            }
-          }
-
-          setQuestionBlocks(newBlocks);
-          const newSurvey = _.cloneDeep(survey);
-          newSurvey.body.questions = Array.from(newBlocks.map(x => x.question));
-          setSurvey(newSurvey);
-        }
-        break;
-      case "Copy":
-        {
-          const newQuestions = Array.from(survey.body.questions);
-          const newQuestion = _.cloneDeep(questionTemplate);
-          newQuestion.id = uuid.v4();
-          newQuestion.number = survey.body.questions.length + 1;
-          newQuestions.push(newQuestion);
-
-          const newSurvey = _.cloneDeep(survey);
-          newSurvey.body.questions = Array.from(newQuestions);
-          setSurvey(newSurvey);
-        }
-        break;
-      case "Delete": {
-        if (survey.body.questions.length > 1) {
-          const newSurvey = _.cloneDeep(survey);
-          newSurvey.body.questions.splice(newSurvey.body.questions.length, 1);
-          setSurvey(newSurvey);
-        }
-        break;
+      case "AddPage": {
+        //New page
       }
+        break;
+      case "AddSection": {
+        //New Section          
+      }
+        break;
+      case "Save": {
+        //Save Survey        
+      }
+        break;
       case "Preview": {
         localStorage.setItem(survey.id, JSON.stringify(survey));
         window.open("http://localhost:3000/view?id=" + survey.id, "_blank");
@@ -110,16 +80,14 @@ const SurveyBuilder = () => {
 
   return (
     <div>
-
-      
-      <Container maxWidth="lg" style={{marginBottom:'200px'}}>
+      <Container maxWidth="lg" style={{ marginBottom: '200px' }}>
         <Grid
           container
           direction="column"
           justify="center"
           spacing={1}
         >
-           
+
           <Grid item xs={12}>
             <SurveyTitleForm handlers={handlers}></SurveyTitleForm>
           </Grid>
@@ -127,7 +95,7 @@ const SurveyBuilder = () => {
             <QuestionBuildBlocks handler={handlers}></QuestionBuildBlocks>
           </Grid>
           <Grid item xs={12}>
-            <SurveyBuilderSpeedDial eventHandler={handlers.handleActions}></SurveyBuilderSpeedDial>
+            <SurveyBuilderActions eventHandler={handlers.handleActions}></SurveyBuilderActions>
           </Grid>
         </Grid>
       </Container>

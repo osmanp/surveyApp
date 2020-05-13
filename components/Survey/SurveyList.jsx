@@ -10,7 +10,7 @@ const StyledTableCell = withStyles((theme) => ({
         color: theme.palette.common.white,
     },
     body: {
-        fontSize: 14,
+        fontSize: 12,
     },
 }))(TableCell);
 
@@ -28,14 +28,14 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 700,
+        minWidth: 600,
     },
 });
 
 const SurveyList = ({ surveys }) => {
     const classes = useStyles();
     return (
-        <TableContainer component={Paper} style={{width:'1500px'}}>
+        <TableContainer component={Paper} style={{width:'1000px'}}>
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                     <TableRow>

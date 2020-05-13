@@ -32,6 +32,13 @@ const QuestionBuildForm = ({ state, question, autoChange, handlers }) => {
                 onMouseEnter={() => setHovering(true)}
                 onMouseLeave={handleMouseLeave}   >
                 <Grid container direction='row'>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={8}>
+                        {
+                            viewState ?
+                                getViewComponent(question) : getEditComponent(handlers, question)
+                        }
+                    </Grid>
                     <Grid item xs={2} alignContent='flex-end' style={{ textAlign: 'right' }}>
                         <Grow direction="up" in={hovering} mountOnEnter unmountOnExit>
                             <QuestionFormActions
@@ -41,13 +48,6 @@ const QuestionBuildForm = ({ state, question, autoChange, handlers }) => {
                             ></QuestionFormActions>
                         </Grow >
                     </Grid>
-                    <Grid item xs={8}>
-                        {
-                            viewState ?
-                                getViewComponent(question) : getEditComponent(handlers, question)
-                        }
-                    </Grid>
-                    <Grid item xs={2}></Grid>
                 </Grid>
             </div>
 

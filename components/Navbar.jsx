@@ -8,7 +8,7 @@ import Link from "./Link";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    background: "#C2EBDD",
+    background: "#F5F5F5",
     overflowY: "hidden",
   },
   avatarSmall: {
@@ -21,14 +21,15 @@ const useStyles = makeStyles((theme) => ({
     color:'black',
     fontWeight: 400,
     "&:hover": {
-      backgroundColor:'#C2EBDD'
+      backgroundColor:'#99CC99'
     },
   },
   avatarLarge: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-    backgroundColor: "#41594F",
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+    backgroundColor: "#99CC99",
     borderRadius: "50%",
+    color:'black',
     border: 0,
     "&:hover": {
       cursor: "pointer",
@@ -48,7 +49,7 @@ const NavBarItem = ({ text, href }) => {
       align="center"
       noWrap
       className={classes.toolbarTitle}
-      style={{ fontSize: '1.1rem',color:'black' ,border:'0.1rem solid #41594F',backgroundColor:'white',
+      style={{ fontSize: '0.8wh',color:'black' ,border:'0.1rem solid #99CC99',
       padding:'10px',paddingRight:'20px',paddingLeft:'20px',borderRadius: '40px'}}      
     >
 
@@ -82,11 +83,10 @@ const Navbar = () => {
             <Grid item xs={2}>
               <Grid container alignContent="center" >
                 <Grid item xs={2}>
-                  <Avatar
-                    alt="Osman P"
+                  <Avatar                    
                     className={classes.avatarLarge}
                     onClick={handleAvatarClick}
-                  >F S</Avatar>
+                  >S W</Avatar>
                 </Grid>
                 <Grid item xs={8}>
                   <Typography
@@ -94,8 +94,8 @@ const Navbar = () => {
                     variant="h5"
                     noWrap
                     align="left"
-                    style={{ fontSize: '2rem',color:'black',padding:'8px',fontFamily:'Garamond'}}
-                  ><b>Fast Survey</b> </Typography>
+                    style={{ fontSize: '2wh',color:'black',padding:'8px',fontFamily:'Garamond'}}
+                  ><b>Survey World</b> </Typography>
                 </Grid>
               </Grid>
             </Grid>

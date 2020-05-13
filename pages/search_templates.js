@@ -14,25 +14,25 @@ export default function SearchTemplates() {
     };
     return (
         <Layout>
-            <Box style={{ marginTop: '60px' }}>
+            <Box style={{ marginTop: '60px',marginBottom:'100px' }}>
                 <Grid container direction='row'>
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <SurveyFilter options={{ showRatings: true }} handlers={handler}></SurveyFilter>
                     </Grid>
-                    <Grid item container xs={10} direction='column' justify='flex-start' alignItems='stretch'>
-                        <Grid item container direction='row' spacing={4}>
+                    <Grid item container xs={8} direction='column' justify='flex-start' alignItems='stretch'>
+                        <Grid item  container direction='row' spacing={4}>
                             {surveyTemplates.map(element => {
-                                return <Grid item xs key={element.id}>
+                                return <Grid item xs={4} key={element.id}>
                                     <TemplateCard survey={element}></TemplateCard>
                                 </Grid>;
                             })}
                         </Grid>
-                        <Grid item xs container direction='row' justify='center'>
-                            <Grid item xs={4}>
+                        <Grid item xs container direction='row' justify='flex-start'>
+                            
                                 <Pagination
                                     count={4} size="large" color='secondary' showFirstButton showLastButton variant="outlined"
                                     style={{ marginTop: '100px' }} />
-                            </Grid>
+                            
 
                         </Grid>
                     </Grid>

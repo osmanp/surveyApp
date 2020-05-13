@@ -17,15 +17,15 @@ export default function ListSurveys() {
     return (
         <Layout >
             <Box style={{ marginTop: '60px' }}>
-                <Grid container direction='row'>
+                <Grid container direction='row' alignItems='flex-end' alignContent='space-between' justify='flex-end'>
                     <Grid item xs={2}>
                         <SurveyFilter options={{ showRatings: false }} handlers={handler}></SurveyFilter>
                     </Grid>
-                    <Grid item container xs={10} direction='column' justify='flex-start' alignItems='stretch'>
+                    <Grid item container xs={9} direction='column' justify='flex-start' alignItems='stretch'>
                         <Grid item xs>
                             <SurveyList surveys={surveyTemplates}></SurveyList>
                         </Grid>                        
-                        <Grid item xs container direction='row' justify='center'>
+                        <Grid item xs container direction='row' justify='flex-start'>
                             <Grid item xs={4}>
                             <Pagination
                                 count={4} size="large"  color='secondary' showFirstButton showLastButton variant="outlined"

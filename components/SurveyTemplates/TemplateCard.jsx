@@ -18,10 +18,10 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 340,
+        maxWidth: 320,
     },
     media: {
-        height: 140,
+        height: 120,
     },
 });
 

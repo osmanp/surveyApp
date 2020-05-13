@@ -15,7 +15,7 @@ const QuestionSlide = ({
       <Grid container direction="column">
         <Grid item xs>
           {questions.map((element, index) => {
-            return <QuestionContainer question={element}></QuestionContainer>;
+            return <QuestionContainer key={index} question={element}></QuestionContainer>;
           })}
         </Grid>
         <Grid item xs style={{ marginTop: "50px" }}>
@@ -66,7 +66,7 @@ const SurveyBody = ({ survey, progressChanged }) => {
   const maxSteps = pageCount;
   progressChanged(((activeStep + 1) / maxSteps) * 100);
   const handleNext = () => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     if (activeStep < maxSteps - 1) {
       setActiveStep(activeStep + 1);
       progressChanged(((activeStep + 1) / maxSteps) * 100);
@@ -97,6 +97,7 @@ const SurveyBody = ({ survey, progressChanged }) => {
             {Array.from(Array(pageCount).keys()).map((element, index) => {
               return (
                 <QuestionSlide
+                  key={index}
                   questions={survey.body.questions.slice(
                     index * survey.body.questionPerPage,
                     index * survey.body.questionPerPage +

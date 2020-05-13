@@ -10,12 +10,12 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-
+import _ from 'lodash';
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   titleInput: {
-    fontSize: 40,
+    fontSize: 30,
     textTransform: "capitalize",
   },
 }));
@@ -23,28 +23,20 @@ const useStyles = makeStyles((theme) => ({
 const SurveyTitleForm = ({ handlers }) => {
   const classes = useStyles();
   const initialState = {
-    text: "A survey example",
-    estimatedTime: "30min",
-    questionCount: 9,
-    showQuestionCount: true,
-    showProgressBar: true,
-    showEstimatedTime: true,
+    title: "A survey example",
+    description:"",    
   };
   const [surveyTitle, setSurveyTitle] = React.useState(initialState);
-  const [estimatedTime, setEstimatedTime] = React.useState(initialState.showEstimatedTime);
+  
   const handleChange = (event) => {
     let newSurveyTitle = _.cloneDeep(surveyTitle);
     switch (event.target.id) {
-      case "show-question-count":
-        newSurveyTitle.showQuestionCount = event.target.checked;
+      case "survey-title":
+        newSurveyTitle.title = event.target.value;
         break;
-      case "show-question-pbar":
-        newSurveyTitle.showProgressBar = event.target.checked;
-        break;
-      case "show-estimated-time":
-        newSurveyTitle.showEstimatedTime = event.target.checked;
-        setEstimatedTime(!estimatedTime);
-        break;
+      case "survey-description":
+        newSurveyTitle.description = event.target.value;
+        break;      
     }
     setSurveyTitle(newSurveyTitle);
     handlers.updateTitle(newSurveyTitle);
@@ -58,9 +50,10 @@ const SurveyTitleForm = ({ handlers }) => {
           margin: "4px",
           marginTop: "20px",          
           borderRadius: '20px',
-          marginLeft:'100px',
-          maxWidth:'78%',
-          alignContent:'center'
+          marginLeft:'240px',
+          maxWidth:'50%',
+          maxHeight:'25vh',
+          
         }}
       >
         <FormControl
@@ -85,7 +78,10 @@ const SurveyTitleForm = ({ handlers }) => {
                 id="survey-title"
                 label="Survey title"
                 type="text"
+                value={surveyTitle.title}
+                onChange={handleChange}
                 fullWidth
+                style={{maxWidth:'90%'}}
                 variant="standard"
                 InputLabelProps={{
                   shrink: true,
@@ -102,12 +98,15 @@ const SurveyTitleForm = ({ handlers }) => {
                 id="survey-description"
                 label="Survey description"
                 type="text"
+                value={surveyTitle.description}
+                onChange={handleChange}
                 fullWidth
                 rows={1}
                 variant="standard"
                 InputLabelProps={{
                   shrink: true,
                 }}
+                style={{maxWidth:'90%'}}
               />
             </Grid>
           </Grid>

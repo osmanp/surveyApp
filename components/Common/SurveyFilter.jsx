@@ -12,15 +12,17 @@ const useStyles = makeStyles({
     },
     drawer: {
         width: '100%',
-        flexShrink: 0,
+        flexShrink: 1,
         overflow: 'auto',
         overflowY: 'unset',
-        paddingTop:'60px'
+        paddingTop:'60px',
+       
     },
     drawerPaper: {
         width: drawerWidth,
         zIndex: 0,
-        paddingTop: '60px'
+        paddingTop: '60px',
+       
     },
     formControl: {
         margin: 1,
@@ -223,7 +225,7 @@ const SurveyTemplatesFilter = ({options,handlers}) => {
                 </Grid>
                 </> : null} 
 
-                <Grid item container xs={12} >
+                <Grid item container xs={12} style={{marginBottom:'200px'}}>
                     <Grid item xs>
                     <Button variant='outlined' color='secondary' onClick={handleClear}>
                        Clear 

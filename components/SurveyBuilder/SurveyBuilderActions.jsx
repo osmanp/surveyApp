@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const MyToolTip = withStyles((theme) => ({
   tooltip: {
-    backgroundColor: '#C2EBDD',
+    backgroundColor: '#C5CDD4',
     color: 'rgba(0, 0, 0, 0.87)', 
     font:'Consolas',
     fontSize: 18,
@@ -32,12 +32,12 @@ const useStyles = makeStyles({
     backgroundColor: 'black'
   }
 });
-const SurveyBuilderSpeedDial = ({ eventHandler }) => {
+const SurveyBuilderActions = ({ eventHandler }) => {
   const [open, setOpen] = React.useState(true);
   const classes = useStyles();
   return (
     <Container maxWidth="xs" style={{ marginTop: "20px" }}>
-      <Paper variant='elevation' elevation={2} style={{ borderRadius: '20px',backgroundColor:'#C2EBDD' }}>
+      <Paper variant='elevation' elevation={2} style={{ borderRadius: '20px',backgroundColor:'#C5CDD4' }}>
         <Grid container direction='row'>
           {actions.map((action) => {
             return (
@@ -62,4 +62,4 @@ const SurveyBuilderSpeedDial = ({ eventHandler }) => {
   );
 };
 
-export default SurveyBuilderSpeedDial;
+export default SurveyBuilderActions;
