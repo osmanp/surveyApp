@@ -1,21 +1,22 @@
-import { MongoClient } from 'mongodb';
-import nextConnect from 'next-connect';
+// import nextConnect from 'next-connect';
+// import db from '../models/models';
 
-const client = new MongoClient('mongodb+srv://dbUser:hE0Oe4CNLLjKprma@surveyapp-wsilo.mongodb.net/test?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// const uri = 'mongodb+srv://dbUser:hE0Oe4CNLLjKprma@surveyapp-wsilo.mongodb.net/test?retryWrites=true&w=majority';
+// const localUri = 'mongodb://localhost:27017/surveyApp';
+// db.mongoose.connect(localUri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
-async function database(req, res, next) {
-  if (!client.isConnected()) await client.connect();
-  req.dbClient = client;
-  req.db = client.db('MCT');
-  return next();
-}
+// async function database(req, res, next) {
+//   if (db.mongoose.Collection.readyState != 1) throw new Error();
+//   req.asd = "db.models";
+//   return next();
+// }
 
-const middleware = nextConnect();
+// const middleware = nextConnect();
 
-middleware.use(database);
+// middleware.use(database);
 
-export default middleware;
+// export default middleware;
 
