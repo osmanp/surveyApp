@@ -8,7 +8,7 @@ import SurveyOptionsForm from './SurveyOptionsForm';
 import SurveyBuilderActions from "./SurveyBuilderActions";
 const uuid = require("uuid");
 
-const SurveyBuilder = () => {
+const SurveyBuilder = ({pageHandler}) => {
   const initialQuestion = {
     id: uuid.v4(),
     type: "free-text",
@@ -24,7 +24,7 @@ const SurveyBuilder = () => {
     id: uuid.v4(),
     title: {
       text: "Untitled Survey",
-      estimatedTime: "30min",
+      estimatedTime: "30",
       questionCount: 1,
     },
     body: {
@@ -76,7 +76,11 @@ const SurveyBuilder = () => {
     updateQuestions: handleQuestionUpdates,
     updateTitle: handleTitleUpdate,
     handleActions: handleActions,
+    updateTitleOptions: (options) => { console.log(options); },
+    updateSurveyOptions: (options) => { console.log(options); },
+    onActionClick : (action) => {pageHandler.onActionClick(action,survey);}
   };
+
 
   return (
     <div>
@@ -99,7 +103,7 @@ const SurveyBuilder = () => {
           </Grid>
         </Grid>
       </Container>
-      <SurveyOptionsForm></SurveyOptionsForm>
+      <SurveyOptionsForm handler={handlers}></SurveyOptionsForm>
     </div>
   );
 };

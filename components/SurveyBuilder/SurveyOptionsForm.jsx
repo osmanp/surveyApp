@@ -290,33 +290,11 @@ const TitleOptionsPanel = ({ handler }) => {
         </ExpansionPanel>);
 };
 
-const SurveyActionsPanel = ({ handler }) => {
-    const [titleOptions, setTitleOptions] = React.useState({});
-    const handleChange = (event) => {
-        const newOptions = _.cloneDeep(titleOptions);
-        switch (event.target.id) {
-            case "show-estimated-time":
-                newOptions.showEstimatedTime = event.target.checked;
-                break;
-            case "estimated-time":
-                if (event.target.value < 0) {
-                    event.target.value = 0;
-                }
-                newOptions.estimatedTime = event.target.value;
-                break;
-            case "show-question-count":
-                newOptions.showQuestionCount = event.target.checked;
-                break;
-            case "show-question-pbar":
-                newOptions.showProgressBar = event.target.value;
-                break;
-            default:
-                break;
-        }
-        setTitleOptions(newOptions);
-        handler.updateTitleOptions(newOptions);
-    };
-    const [expand, setExpand] = React.useState(false);
+const SurveyActionsPanel = ({ handler }) => {    
+    const onClick = (action) => {     
+
+        handler.onActionClick(action);
+    };    
     return (
         <Paper variant='elevation' elevation={2} style={{marginTop:'20px',padding:'20px'}}>
 
@@ -331,6 +309,7 @@ const SurveyActionsPanel = ({ handler }) => {
                         fullWidth
                         color='primary'
                         variant='outlined'
+                        onClick={()=>onClick("Save")}
                         startIcon={<SaveIcon></SaveIcon>}
                     >Save Survey
                   </Button>
@@ -340,8 +319,9 @@ const SurveyActionsPanel = ({ handler }) => {
                     fullWidth              
                         color='primary'
                         variant='outlined'
+                        onClick={()=>onClick("PDFExport")}
                         startIcon={<SaveIcon></SaveIcon>}
-                    >Save Survey As
+                    >Export PDF
                   </Button>
                 </Grid>
                 <Grid item xs>
@@ -349,6 +329,7 @@ const SurveyActionsPanel = ({ handler }) => {
                     fullWidth
                         color='primary'
                         variant='outlined'
+                        onClick={()=>onClick("Preview")}
                         startIcon={<VisibilityIcon></VisibilityIcon>}
                     >Preview
                   </Button>
@@ -358,6 +339,7 @@ const SurveyActionsPanel = ({ handler }) => {
                     fullWidth
                         color='primary'
                         variant='outlined'
+                        onClick={()=>onClick("Print")}
                         startIcon={<PrintIcon></PrintIcon>}
                     >Print
                   </Button>
@@ -367,13 +349,13 @@ const SurveyActionsPanel = ({ handler }) => {
     );
 };
 
-const SurveyOptionsForm = () => {
+const SurveyOptionsForm = ({handler}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
-    const handler = {
-        updateTitleOptions: (options) => { console.log(options); },
-        updateSurveyOptions: (options) => { console.log(options); },
-    };
+    // const handler = {
+    //     updateTitleOptions: (options) => { console.log(options); },
+    //     updateSurveyOptions: (options) => { console.log(options); },
+    // };
     return (
         <div>
             <Drawer

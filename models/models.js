@@ -36,7 +36,7 @@ const QuestionBodySchema = new Schema({
     options:[{
         label:String,
         value:Number,
-        id:Number,
+        index:Number,
         other:Boolean
     }],
     //Slider
@@ -84,7 +84,8 @@ const UserSchema = new Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    surveys:[ObjectID]
 });
 
 UserSchema.plugin(timestamps);
@@ -121,9 +122,9 @@ const SurveyTitleSchema = new Schema({
 
 
 const SurveyBodySchema = new Schema({
-    questions:[ObjectID],
-    sections:[ObjectID],
-    pageBreaks:[ObjectID]    
+    questions:[{type:Schema.Types.ObjectId, ref:"questions"}],
+    sections:[Number],
+    pageBreaks:[Number]    
 });
 
 
@@ -134,8 +135,7 @@ const SurveyOptionsSchema = new Schema({
     backgroundColor:String
 });
 
-const SurveySchema = new Schema({
-    user:ObjectID,
+const SurveySchema = new Schema({    
     attributes:SurveyAttributesSchema,
     title:SurveyTitleSchema,
     body:SurveyBodySchema,
@@ -146,13 +146,13 @@ SurveySchema.plugin(timestamps);
 
 mongoose.models = {};
 module.exports = {
-    QuestionTitle: mongoose.models.QuestionTitle || mongoose.model('questionTitles',QuestionTitleSchema),
-    QuestionBody: mongoose.models.QuestionBody || mongoose.model('questionBodies',QuestionBodySchema),
-    Question: mongoose.models.Question || mongoose.model('questions',QuestionSchema),
-    // User: mongoose.model('users',UserSchema),
-    // SurveyTitle:  mongoose.model('surveyTitles',SurveyTitleSchema),
-    // SurveyTitleOptions:  mongoose.model('surveyTitleOptions',SurveyTitleOptionsSchema),
-    // SurveyBody:  mongoose.model('surveyBodies',SurveyBodySchema),
-    // SurveyOption:  mongoose.model('surveyOptions',SurveyOptionsSchema),
-    // Survey:mongoose.model('surveys',SurveySchema)
+    QuestionTitle: mongoose.model('questionTitles',QuestionTitleSchema),
+    QuestionBody: mongoose.model('questionBodies',QuestionBodySchema),
+    Question:  mongoose.model('questions',QuestionSchema),
+    User: mongoose.model('users',UserSchema),
+    SurveyTitle:  mongoose.model('surveyTitles',SurveyTitleSchema),
+    SurveyTitleOptions:  mongoose.model('surveyTitleOptions',SurveyTitleOptionsSchema),
+    SurveyBody:  mongoose.model('surveyBodies',SurveyBodySchema),
+    SurveyOption:  mongoose.model('surveyOptions',SurveyOptionsSchema),
+    Survey:mongoose.model('surveys',SurveySchema)
 };

@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-micro';
 import mongoose from 'mongoose';
-import { schema } from '../../lib/apollo/schema';
+import {schema} from '../../lib/apollo/schema';
 import models from '../../models/models';
 
 const uri = 'mongodb+srv://dbUser:hE0Oe4CNLLjKprma@surveyapp-wsilo.mongodb.net/test?retryWrites=true&w=majority';
@@ -17,7 +17,8 @@ const applyDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true  
     });
-  };    
+    
+  };
   return {db : models};
 };
 
